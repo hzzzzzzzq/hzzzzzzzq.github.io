@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.0.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.9.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+<meta name="description" content="字符串的遍历ES6 中添加了字符串的遍历器接口，字符串就可以使用 for...of 来遍历了。 1234let s &#x3D; &amp;#x27;Hello&amp;#x27;;for (let c of s) &amp;#123;  console.log(c); &#x2F;&#x2F; H e l l o&amp;#125;  JSON.stringify() 和 JSON.parse()在有时候，我们需要将一个 JSON 格式的数据，转成字符串进">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ES 6 系列之字符串的扩展">
+<meta property="og:url" content="http://example.com/2022/01/18/Blog-ES-6-4-%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E6%89%A9%E5%B1%95/index.html">
+<meta property="og:site_name" content="Welcome">
+<meta property="og:description" content="字符串的遍历ES6 中添加了字符串的遍历器接口，字符串就可以使用 for...of 来遍历了。 1234let s &#x3D; &amp;#x27;Hello&amp;#x27;;for (let c of s) &amp;#123;  console.log(c); &#x2F;&#x2F; H e l l o&amp;#125;  JSON.stringify() 和 JSON.parse()在有时候，我们需要将一个 JSON 格式的数据，转成字符串进">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-01-18T04:57:41.125Z">
+<meta property="article:modified_time" content="2022-01-18T05:00:45.853Z">
+<meta property="article:author" content="hzzzzzzzq">
+<meta property="article:tag" content="ES 6">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://example.com/2022/01/18/Blog-ES-6-4-%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E6%89%A9%E5%B1%95/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2022/01/18/Blog-ES-6-4-%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E6%89%A9%E5%B1%95/","path":"2022/01/18/Blog-ES-6-4-字符串的扩展/","title":"ES 6 系列之字符串的扩展"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>ES 6 系列之字符串的扩展 | Welcome</title>
+  
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Welcome</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">欢迎来到我的博客</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+        <li class="menu-item menu-item-commonweal"><a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>公益 404</a></li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E9%81%8D%E5%8E%86"><span class="nav-number">1.</span> <span class="nav-text">字符串的遍历</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JSON-stringify-%E5%92%8C-JSON-parse"><span class="nav-number">2.</span> <span class="nav-text">JSON.stringify() 和 JSON.parse()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A8%A1%E7%89%88%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="nav-number">3.</span> <span class="nav-text">模版字符串</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%AD%E7%9A%84%E6%96%B0%E5%A2%9E%E6%96%B9%E6%B3%95"><span class="nav-number">4.</span> <span class="nav-text">字符串中的新增方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#includes"><span class="nav-number">4.1.</span> <span class="nav-text">includes()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#startsWith-%E3%80%81endsWith"><span class="nav-number">4.2.</span> <span class="nav-text">startsWith()、endsWith()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#repeat"><span class="nav-number">4.3.</span> <span class="nav-text">repeat()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#padStart%E3%80%81padEnd"><span class="nav-number">4.4.</span> <span class="nav-text">padStart、padEnd()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#trimStart-%E3%80%81trimEnd"><span class="nav-number">4.5.</span> <span class="nav-text">trimStart()、trimEnd()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#replaceAll"><span class="nav-number">4.6.</span> <span class="nav-text">replaceAll()</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="hzzzzzzzq"
+      src="/images/my_avatoar.png">
+  <p class="site-author-name" itemprop="name">hzzzzzzzq</p>
+  <div class="site-description" itemprop="description">工作是修心的道场</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">12</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/01/18/Blog-ES-6-4-%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E6%89%A9%E5%B1%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/my_avatoar.png">
+      <meta itemprop="name" content="hzzzzzzzq">
+      <meta itemprop="description" content="工作是修心的道场">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Welcome">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          ES 6 系列之字符串的扩展
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2022-01-18 12:57:41 / 修改时间：13:00:45" itemprop="dateCreated datePublished" datetime="2022-01-18T12:57:41+08:00">2022-01-18</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/ECMAScript-6/" itemprop="url" rel="index"><span itemprop="name">ECMAScript 6</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h2 id="字符串的遍历"><a href="#字符串的遍历" class="headerlink" title="字符串的遍历"></a>字符串的遍历</h2><p>ES6 中添加了字符串的遍历器接口，字符串就可以使用 <code>for...of</code> 来遍历了。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> s = <span class="string">&#x27;Hello&#x27;</span>;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> c <span class="keyword">of</span> s) &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(c); <span class="comment">// H e l l o</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="JSON-stringify-和-JSON-parse"><a href="#JSON-stringify-和-JSON-parse" class="headerlink" title="JSON.stringify() 和 JSON.parse()"></a><code>JSON.stringify()</code> 和 <code>JSON.parse()</code></h2><p>在有时候，我们需要将一个 <code>JSON</code> 格式的数据，转成字符串进行页面传递。<br>所以这时候采用 <code>JSON.stringify()</code> 进行序列化。然后传递，在目的页面使用 <code>JSON.parse()</code> 转为 <code>JavaScript</code> 对象。在进行大数据传递时，时常需要。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> person = &#123;</span><br><span class="line">  <span class="attr">name</span>: <span class="string">&#x27;hzzzzzzzq&#x27;</span>,</span><br><span class="line">  <span class="attr">age</span>: <span class="number">18</span>,</span><br><span class="line">  <span class="attr">height</span>: <span class="number">1.8</span>,</span><br><span class="line">  <span class="attr">weight</span>: <span class="number">140</span>,</span><br><span class="line">  <span class="attr">skills</span>: [<span class="string">&#x27;JavaScript&#x27;</span>],</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">let</span> s = <span class="built_in">JSON</span>.stringify(person);</span><br><span class="line"><span class="built_in">console</span>.log(s);</span><br><span class="line"><span class="comment">// &#123;&quot;name&quot;:&quot;hzzzzzzzq&quot;,&quot;age&quot;:18,&quot;height&quot;:1.8,&quot;weight&quot;:140,&quot;skills&quot;:[&quot;JavaScript&quot;]&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> str = <span class="built_in">JSON</span>.parse(s);</span><br><span class="line"><span class="built_in">console</span>.log(str);</span><br><span class="line"><span class="comment">// &#123;</span></span><br><span class="line"><span class="comment">//  &quot;name&quot;: &quot;hzzzzzzzq&quot;,</span></span><br><span class="line"><span class="comment">//  &quot;age&quot;: 18,</span></span><br><span class="line"><span class="comment">//  &quot;height&quot;: 1.8,</span></span><br><span class="line"><span class="comment">//  &quot;weight&quot;: 140,</span></span><br><span class="line"><span class="comment">//  &quot;skills&quot;: [</span></span><br><span class="line"><span class="comment">//     &quot;JavaScript&quot;</span></span><br><span class="line"><span class="comment">//   ]</span></span><br><span class="line"><span class="comment">// &#125;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="模版字符串"><a href="#模版字符串" class="headerlink" title="模版字符串"></a>模版字符串</h2><p>什么是模版字符串呢？简单来说，其实就是加强版的字符串，使用 ( <strong>`</strong> )作为标识符 。可以作为普通的字符串使用，也可以用来定义多行字符串，或者在字符串中使用变量。</p>
+<p>我们来看看使用普通字符串时 是怎么进行换行，或者加入变量的。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> name = <span class="string">&#x27;hzzzzzzzq&#x27;</span>;</span><br><span class="line"><span class="keyword">let</span> age = <span class="number">18</span>;</span><br><span class="line"><span class="keyword">let</span> info = <span class="string">&#x27;my name is &#x27;</span> + name + <span class="string">&#x27;\n my age is &#x27;</span> + age;</span><br><span class="line"><span class="built_in">console</span>.log(info);</span><br><span class="line"><span class="comment">// my name is hzzzzzzzq</span></span><br><span class="line"><span class="comment">// my age is 18</span></span><br></pre></td></tr></table></figure>
+
+<p>然后我们再来看看模版字符串的写法。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> name = <span class="string">&#x27;hzzzzzzzq&#x27;</span>;</span><br><span class="line"><span class="keyword">let</span> age = <span class="number">18</span>;</span><br><span class="line"><span class="keyword">let</span> info = <span class="string">`my name is <span class="subst">$&#123;name&#125;</span></span></span><br><span class="line"><span class="string">my age is <span class="subst">$&#123;age&#125;</span>`</span>;</span><br><span class="line"><span class="built_in">console</span>.log(info);</span><br><span class="line"><span class="comment">// my name is hzzzzzzzq</span></span><br><span class="line"><span class="comment">// my age is 18</span></span><br></pre></td></tr></table></figure>
+
+<p>换行，直接就使用回车就可以换行，你输入的样子是怎样的，打印基本上就是怎样的。</p>
+<p>变量采用 <code>$&#123;&#125;</code> 来嵌入，也可以直接写入一个字符串中，少写了许多没必要的 <code>+</code> 号。</p>
+<h2 id="字符串中的新增方法"><a href="#字符串中的新增方法" class="headerlink" title="字符串中的新增方法"></a>字符串中的新增方法</h2><p>在这里就列举一些常用的实例方法</p>
+<h3 id="includes"><a href="#includes" class="headerlink" title="includes()"></a>includes()</h3><p><code>includes()</code> 实例方法，返回的是一个布尔值（<code>true</code>和<code>false</code>），<strong>表示是否找到了参数字符串</strong>。<br>参数二来表示开始搜索的位置。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> s = <span class="string">&#x27;Hello hzzzzzzzq&#x27;</span>;</span><br><span class="line"><span class="built_in">console</span>.log(s.includes(<span class="string">&#x27;Hello&#x27;</span>)); <span class="comment">// true</span></span><br><span class="line"><span class="built_in">console</span>.log(s.includes(<span class="string">&#x27;x&#x27;</span>)); <span class="comment">// false</span></span><br><span class="line"><span class="built_in">console</span>.log(s.includes(<span class="string">&#x27;zzzzzzz&#x27;</span>)); <span class="comment">// true</span></span><br><span class="line"><span class="built_in">console</span>.log(s.includes(<span class="string">&#x27;H&#x27;</span>, <span class="number">2</span>)); <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="startsWith-、endsWith"><a href="#startsWith-、endsWith" class="headerlink" title="startsWith()、endsWith()"></a>startsWith()、endsWith()</h3><ul>
+<li><strong>startsWith()</strong><br><code>startsWith()</code> 返回也是布尔值，<strong>表示参数是否在原字符串的头部</strong>。<br>第二参数也表示开始搜索的位置。</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> s = <span class="string">&#x27;Hello hzzzzzzzq&#x27;</span>;</span><br><span class="line"><span class="built_in">console</span>.log(s.startsWith(<span class="string">&#x27;Hello&#x27;</span>)); <span class="comment">// true</span></span><br><span class="line"><span class="built_in">console</span>.log(s.startsWith(<span class="string">&#x27;e&#x27;</span>)); <span class="comment">// false</span></span><br><span class="line"><span class="comment">// 表示从 1 开始</span></span><br><span class="line"><span class="built_in">console</span>.log(s.startsWith(<span class="string">&#x27;Hello&#x27;</span>, <span class="number">1</span>)); <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>endsWith()</strong><br><code>endsWith()</code> 返回也是布尔值，<strong>表示参数是否在原字符串的尾部</strong>。<br>注意：这里的第二参数表示的是到 n 为止，不像 <code>startsWith()</code> 是从 <code>n</code> 开始到字符串结尾。</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> s = <span class="string">&#x27;Hello hzzzzzzzq&#x27;</span>;</span><br><span class="line"><span class="built_in">console</span>.log(s.endsWith(<span class="string">&#x27;q&#x27;</span>)); <span class="comment">// true</span></span><br><span class="line"><span class="built_in">console</span>.log(s.endsWith(<span class="string">&#x27;zzzzq&#x27;</span>)); <span class="comment">// true</span></span><br><span class="line"><span class="comment">// 表示看前 5 个字符</span></span><br><span class="line"><span class="built_in">console</span>.log(s.endsWith(<span class="string">&#x27;o&#x27;</span>, <span class="number">5</span>)); <span class="comment">// true</span></span><br><span class="line"><span class="comment">// 表示看前 4 个字符</span></span><br><span class="line"><span class="built_in">console</span>.log(s.endsWith(<span class="string">&#x27;o&#x27;</span>, <span class="number">4</span>)); <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="repeat"><a href="#repeat" class="headerlink" title="repeat()"></a>repeat()</h3><p><code>repeat()</code> 返回一个新字符串，表示将原字符串重复 <code>n</code> 次。</p>
+<ul>
+<li>如果传入的是小数，则会往下取整。</li>
+<li>传入参数不能是 <code>Infinity</code> 和 小于 <code>-1</code> 的值</li>
+<li><code>0</code> 到 <code>-1</code> 之间的小数，则按照等同于 <code>0</code> 来计算。</li>
+<li><code>NaN</code> 会被转为 <code>0</code></li>
+<li>参数是字符串则先转为数字，如果不能转为数字，则为 <code>0</code></li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> s = <span class="string">&#x27;a&#x27;</span>;</span><br><span class="line"><span class="built_in">console</span>.log(s.repeat(<span class="number">4</span>)); <span class="comment">// &#x27;aaaa&#x27;</span></span><br><span class="line"><span class="built_in">console</span>.log(s.repeat(<span class="number">3.6</span>)); <span class="comment">// &#x27;aaa&#x27;</span></span><br><span class="line"><span class="built_in">console</span>.log(s.repeat(-<span class="number">0.6</span>)); <span class="comment">// &#x27;&#x27;</span></span><br><span class="line"><span class="built_in">console</span>.log(s.repeat(<span class="string">&#x27;aaa&#x27;</span>)); <span class="comment">// &#x27;&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="padStart、padEnd"><a href="#padStart、padEnd" class="headerlink" title="padStart、padEnd()"></a>padStart、padEnd()</h3><p>两个实例方法，就是用于字符串的补齐。<br><strong>第一参数表示想要字符串的长度，第二参数表示字符串没达到第一参数时使用参数二字符串进行补齐。</strong></p>
+<ul>
+<li><strong>padStart()</strong><br>很明显，<code>Start</code>，就是在字符串的头部补全。</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> s = <span class="string">&#x27;aaa&#x27;</span>;</span><br><span class="line"><span class="comment">// 如果原长度大于或等于想要补齐长度，则不生效。</span></span><br><span class="line"><span class="built_in">console</span>.log(s.padStart(<span class="number">2</span>, <span class="string">&#x27;b&#x27;</span>)); <span class="comment">// aaa</span></span><br><span class="line"><span class="built_in">console</span>.log(s.padStart(<span class="number">10</span>, <span class="string">&#x27;b&#x27;</span>)); <span class="comment">// bbbbbbbaaa</span></span><br><span class="line"><span class="comment">// 如果补齐字符串长度大于剩余格数，则会省略后面字符串</span></span><br><span class="line"><span class="built_in">console</span>.log(s.padStart(<span class="number">4</span>, <span class="string">&#x27;bcde&#x27;</span>)); <span class="comment">// baaa</span></span><br><span class="line"><span class="comment">// 如果，第二参数无内容，则使用空格补齐</span></span><br><span class="line"><span class="built_in">console</span>.log(s.padStart(<span class="number">4</span>)); <span class="comment">// &#x27; aaa&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>padEnd()</strong><br><code>End</code> 就是在字符串的尾部补全。</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> s = <span class="string">&#x27;aaa&#x27;</span>;</span><br><span class="line"><span class="comment">// 如果原长度大于或等于想要补齐长度，则不生效。</span></span><br><span class="line"><span class="built_in">console</span>.log(s.padEnd(<span class="number">2</span>, <span class="string">&#x27;b&#x27;</span>)); <span class="comment">// aaa</span></span><br><span class="line"><span class="built_in">console</span>.log(s.padEnd(<span class="number">10</span>, <span class="string">&#x27;b&#x27;</span>)); <span class="comment">// aaabbbbbbb</span></span><br><span class="line"><span class="comment">// 如果补齐字符串长度大于剩余格数，则会省略后面字符串</span></span><br><span class="line"><span class="built_in">console</span>.log(s.padEnd(<span class="number">4</span>, <span class="string">&#x27;bcde&#x27;</span>)); <span class="comment">// aaab</span></span><br><span class="line"><span class="comment">// 如果，第二参数无内容，则使用空格补齐</span></span><br><span class="line"><span class="built_in">console</span>.log(s.padEnd(<span class="number">4</span>)); <span class="comment">// &#x27;aaa &#x27;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="trimStart-、trimEnd"><a href="#trimStart-、trimEnd" class="headerlink" title="trimStart()、trimEnd()"></a>trimStart()、trimEnd()</h3><p>这两个实例都是用来<strong>去除字符串空格用的</strong>。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> s = <span class="string">&#x27;   x   &#x27;</span>;</span><br><span class="line"><span class="comment">// start 去除前面空格</span></span><br><span class="line"><span class="built_in">console</span>.log(s.trimStart()); <span class="comment">// &#x27;x   &#x27;</span></span><br><span class="line"><span class="comment">// end 去除后面空格</span></span><br><span class="line"><span class="built_in">console</span>.log(s.trimEnd()); <span class="comment">// &#x27;   x&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="replaceAll"><a href="#replaceAll" class="headerlink" title="replaceAll()"></a>replaceAll()</h3><p><code>replaceAll()</code> 实例方法是用来替换字符串中的字符用的。</p>
+<p>在提到这个之前，我们先看看 <code>replace()</code> ，<strong>参数一是被替换的值，参数二是替换值</strong>，简单来讲就是，<strong>参数二用来替换参数一</strong>。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> s = <span class="string">&#x27;abcabc&#x27;</span>;</span><br><span class="line"><span class="built_in">console</span>.log(s.replace(<span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;x&#x27;</span>)); <span class="comment">// xbcabc</span></span><br></pre></td></tr></table></figure>
+
+<p><code>replace()</code> 只能替代一个，是第一个遇到的。</p>
+<p>那我们来看看 <code>replaceAll()</code>，是全部替换。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> s = <span class="string">&#x27;abcabc&#x27;</span>;</span><br><span class="line"><span class="built_in">console</span>.log(s.replaceAll(<span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;x&#x27;</span>)); <span class="comment">// xbcxbc</span></span><br></pre></td></tr></table></figure>
+
+<p>这里是简单的用法，当然在 <code>replaceAll()</code> 第二参数还可以传入一个函数，具体可以看看 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/String/replaceAll">MDN 的 replaceAll()</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/ES-6/" rel="tag"># ES 6</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2022/01/18/Blog-ES-6-3-%E5%8F%98%E9%87%8F%E7%9A%84%E8%A7%A3%E6%9E%84%E8%B5%8B%E5%80%BC/" rel="prev" title="ES 6 系列之变量的解构赋值">
+                  <i class="fa fa-chevron-left"></i> ES 6 系列之变量的解构赋值
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2022/01/18/Blog-ES-6-5-%E5%87%BD%E6%95%B0%E7%9A%84%E6%89%A9%E5%B1%95/" rel="next" title="ES 6 系列之函数的扩展">
+                  ES 6 系列之函数的扩展 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">hzzzzzzzq</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

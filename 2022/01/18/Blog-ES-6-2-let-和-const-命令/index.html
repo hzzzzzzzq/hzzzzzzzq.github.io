@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.0.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.9.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+<meta name="description" content="let 命令简单实用ES6 中新增了 let 命令，用来声明变量。使用方式同 var 命令，但是 let 命令只在所在的代码块内有效。 123456&amp;#123;  let a &#x3D; 10;  var b &#x3D; 10;&amp;#125;console.log(a); &#x2F;&#x2F; 报错，a 为定义 ReferenceError: a is not definedconsole.log(b); &#x2F;&#x2F; 10  在上面的使">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ES 6 系列之Let 和 const 命令">
+<meta property="og:url" content="http://example.com/2022/01/18/Blog-ES-6-2-let-%E5%92%8C-const-%E5%91%BD%E4%BB%A4/index.html">
+<meta property="og:site_name" content="Welcome">
+<meta property="og:description" content="let 命令简单实用ES6 中新增了 let 命令，用来声明变量。使用方式同 var 命令，但是 let 命令只在所在的代码块内有效。 123456&amp;#123;  let a &#x3D; 10;  var b &#x3D; 10;&amp;#125;console.log(a); &#x2F;&#x2F; 报错，a 为定义 ReferenceError: a is not definedconsole.log(b); &#x2F;&#x2F; 10  在上面的使">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-01-18T04:55:11.942Z">
+<meta property="article:modified_time" content="2022-01-18T05:00:38.528Z">
+<meta property="article:author" content="hzzzzzzzq">
+<meta property="article:tag" content="ES 6">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://example.com/2022/01/18/Blog-ES-6-2-let-%E5%92%8C-const-%E5%91%BD%E4%BB%A4/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2022/01/18/Blog-ES-6-2-let-%E5%92%8C-const-%E5%91%BD%E4%BB%A4/","path":"2022/01/18/Blog-ES-6-2-let-和-const-命令/","title":"ES 6 系列之Let 和 const 命令"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>ES 6 系列之Let 和 const 命令 | Welcome</title>
+  
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Welcome</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">欢迎来到我的博客</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+        <li class="menu-item menu-item-commonweal"><a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>公益 404</a></li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#let-%E5%91%BD%E4%BB%A4"><span class="nav-number">1.</span> <span class="nav-text">let 命令</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AE%80%E5%8D%95%E5%AE%9E%E7%94%A8"><span class="nav-number">1.1.</span> <span class="nav-text">简单实用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#for-%E5%BE%AA%E7%8E%AF%E4%B8%AD%E4%BD%BF%E7%94%A8"><span class="nav-number">1.2.</span> <span class="nav-text">for 循环中使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8D%E5%AD%98%E5%9C%A8%E5%8F%98%E9%87%8F%E6%8F%90%E5%8D%87"><span class="nav-number">1.3.</span> <span class="nav-text">不存在变量提升</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9A%82%E6%97%B6%E6%80%A7%E6%AD%BB%E5%8C%BA"><span class="nav-number">1.4.</span> <span class="nav-text">暂时性死区</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8D%E5%85%81%E8%AE%B8%E9%87%8D%E5%A4%8D%E5%A3%B0%E6%98%8E"><span class="nav-number">1.5.</span> <span class="nav-text">不允许重复声明</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#const-%E5%91%BD%E4%BB%A4"><span class="nav-number">2.</span> <span class="nav-text">const 命令</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95"><span class="nav-number">2.1.</span> <span class="nav-text">基本用法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%AC%E8%B4%A8"><span class="nav-number">2.2.</span> <span class="nav-text">本质</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="hzzzzzzzq"
+      src="/images/my_avatoar.png">
+  <p class="site-author-name" itemprop="name">hzzzzzzzq</p>
+  <div class="site-description" itemprop="description">工作是修心的道场</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">12</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/01/18/Blog-ES-6-2-let-%E5%92%8C-const-%E5%91%BD%E4%BB%A4/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/my_avatoar.png">
+      <meta itemprop="name" content="hzzzzzzzq">
+      <meta itemprop="description" content="工作是修心的道场">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Welcome">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          ES 6 系列之Let 和 const 命令
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2022-01-18 12:55:11 / 修改时间：13:00:38" itemprop="dateCreated datePublished" datetime="2022-01-18T12:55:11+08:00">2022-01-18</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/ECMAScript-6/" itemprop="url" rel="index"><span itemprop="name">ECMAScript 6</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h2 id="let-命令"><a href="#let-命令" class="headerlink" title="let 命令"></a>let 命令</h2><h3 id="简单实用"><a href="#简单实用" class="headerlink" title="简单实用"></a><strong>简单实用</strong></h3><p>ES6 中新增了 <code>let</code> 命令，用来声明变量。使用方式同 <code>var</code> 命令，但是 <code>let</code> 命令只在所在的代码块内有效。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="keyword">let</span> a = <span class="number">10</span>;</span><br><span class="line">  <span class="keyword">var</span> b = <span class="number">10</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(a); <span class="comment">// 报错，a 为定义 ReferenceError: a is not defined</span></span><br><span class="line"><span class="built_in">console</span>.log(b); <span class="comment">// 10</span></span><br></pre></td></tr></table></figure>
+
+<p>在上面的使用案例中，我们可以看出 <code>let</code> 命令只在代码块中生效，而在代码块以外使用则无效。</p>
+<h3 id="for-循环中使用"><a href="#for-循环中使用" class="headerlink" title="for 循环中使用"></a><strong>for 循环中使用</strong></h3><p>我们来看看在 <code>for</code> 循环中使用 <code>var</code> 命令.</p>
+<p>下面这段代码，打印出来的会是什么呢？可以跑一下代码，看一下控制台。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++) &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(i);</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(i); <span class="comment">// 5</span></span><br></pre></td></tr></table></figure>
+
+<p>好了，你会发现，所有的打印都是 <code>5</code>，为什么呢？是因为 <code>var</code> 命令是在全局范围内有效，所以全局只有一个变量 <code>i</code>，每一次循环，变量 <code>i</code> 的值都会发生改变，所以当你打印是，打印的就是全局的 <code>i</code> ，也就是经过多次变化赋值的 <code>5</code>。</p>
+<p>上面代码中，我在外面打印了一下 <code>i</code> ，来证明 <code>var</code> 定义的是一个全局变量。</p>
+<p>来，让我们将 <code>var</code> 改成 <code>let</code>，现在打印的结果又是什么呢？</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++) &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(i);</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(i); <span class="comment">// ReferenceError: i is not defined</span></span><br></pre></td></tr></table></figure>
+
+<p>当然，我想很多人都猜到了结果，就是 <code>0 1 2 3 4</code> ，那么这里又是为什么呢？</p>
+<p><code>let</code> 变量只在所在的代码块内有效，在子代码块中依然有效。在上述循环中 <code>i</code> 只在本轮循环内有效，所以每一次循环的 <code>i</code> 其实都是一个新定义的变量，所以会输出当前 <code>i</code> 的值，每次循环对应输出。</p>
+<p>当然，这里可能会出现一个问题，每轮的变量都是一个新变量，那它是怎么知道上一轮循环的值的？稍做解释：<a target="_blank" rel="noopener" href="https://jsshou.cn/blog/frontend/V8study.html#%E5%89%8D%E8%A8%80">JS 引擎(v8)</a>内部会记住上一轮循环的值，初始化本轮的变量时，就在上一轮循环的基础上进行计算。</p>
+<p>上面我们说，<code>let</code> 命令在子代码块中也有效，可以从 <code>for</code> 循环上来看，<code>()</code> 内部其实就是一个父级作用域，而 <code>&#123;&#125;</code> 内部就是一个单独的子作用域。</p>
+<h3 id="不存在变量提升"><a href="#不存在变量提升" class="headerlink" title="不存在变量提升"></a>不存在变量提升</h3><p>变量提升，即变量可以在声明之前使用，值为 <code>undefined</code>，<code>var</code> 命令存在，而 <code>let</code> 命令并没有变量提升，照样，我们来看看使用的案例。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(a); <span class="comment">// undefined</span></span><br><span class="line"><span class="keyword">var</span> a = <span class="number">10</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(b); <span class="comment">// ReferenceError</span></span><br><span class="line"><span class="keyword">let</span> b = <span class="number">10</span>;</span><br></pre></td></tr></table></figure>
+
+<p>可以在控制台中跑一下这段代码，进行尝试。你会发现，<code>a</code> 变量进行了变量提升，而 <code>b</code> 变量没有发生，这表明了在声明之前使用，变量 <code>b</code> 是不存在的。</p>
+<h3 id="暂时性死区"><a href="#暂时性死区" class="headerlink" title="暂时性死区"></a>暂时性死区</h3><p><strong>代码块中，使用 <code>let</code> 命令声明变量之前，该变量都是不可用的</strong>。</p>
+<p>在外部有一个全局变量 <code>x</code>，但是在内部使用 <code>let</code> 声明了一个 <code>x</code>，于是内部的 <code>x</code> 绑定了这个代码块，不受部影响。</p>
+<p>但是在内部，声明变量之前的这个区域就是<strong>暂时性死区</strong>，我们来从下面的代码来看。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> x = <span class="number">100</span>;</span><br><span class="line"><span class="keyword">if</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">  <span class="comment">// 暂时性死区 开始点</span></span><br><span class="line">  x = <span class="number">10</span>; <span class="comment">// 报错</span></span><br><span class="line">  <span class="built_in">console</span>.log(x); <span class="comment">// 报错</span></span><br><span class="line">  <span class="keyword">let</span> x; <span class="comment">// 暂时性死区结束点</span></span><br><span class="line">  <span class="built_in">console</span>.log(X); <span class="comment">// undefined</span></span><br><span class="line"></span><br><span class="line">  x = <span class="number">20</span>;</span><br><span class="line">  <span class="built_in">console</span>.log(x); <span class="comment">// 20</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>暂时性死区</strong>的存在，也就意味着 <code>typeof</code> 的操作会变的不安全，在没有声明变量时，使用 <code>typeof</code> 并不会报错，返回一个 <code>undefined</code>，然而因为暂时性死区，会使得 <code>typeof</code> 报错 <code>ReferenceError</code>。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="keyword">typeof</span> x); <span class="comment">// undefined</span></span><br><span class="line">  <span class="built_in">console</span>.log(<span class="keyword">typeof</span> y); <span class="comment">// ReferenceError</span></span><br><span class="line">  <span class="keyword">let</span> y;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在<a target="_blank" rel="noopener" href="https://github.com/hzzzzzzzq/Blog/issues/6">函数默认值</a>中也存在暂时性死区，而且会不容易发现。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">add</span>(<span class="params">x = y, y = <span class="number">1</span></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> x + y;</span><br><span class="line">&#125;</span><br><span class="line">add(); <span class="comment">// ReferenceError</span></span><br></pre></td></tr></table></figure>
+
+<p>在上面的代码中，就是如此，给<a target="_blank" rel="noopener" href="https://github.com/hzzzzzzzq/Blog/issues/6">函数赋默认值</a>时，使用后面的值赋值给前面的 <code>x</code>，而这时候 <code>y</code> 还没有定义，所以会报错。</p>
+<h3 id="不允许重复声明"><a href="#不允许重复声明" class="headerlink" title="不允许重复声明"></a>不允许重复声明</h3><p><code>var</code> 变量是允许进行重复声明的，但是 <code>let</code> 变量是不允许的。</p>
+<p>来，上代码。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="number">10</span>;</span><br><span class="line"><span class="keyword">var</span> a = <span class="number">20</span>;</span><br><span class="line"><span class="built_in">console</span>.log(a); <span class="comment">// 20</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> b = <span class="number">10</span>;</span><br><span class="line"><span class="keyword">let</span> b = <span class="number">20</span>;</span><br><span class="line"><span class="built_in">console</span>.log(b); <span class="comment">// 20</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> c = <span class="number">10</span>;</span><br><span class="line"><span class="keyword">var</span> c = <span class="number">20</span>;</span><br><span class="line"><span class="comment">// 报错</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> d = <span class="number">10</span>;</span><br><span class="line"><span class="keyword">let</span> d = <span class="number">20</span>;</span><br><span class="line"><span class="comment">// 报错</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="const-命令"><a href="#const-命令" class="headerlink" title="const 命令"></a>const 命令</h2><p><code>const</code> 命令 声明一个只读的常量。一旦声明，常量的值就不能改变</p>
+<h3 id="基本用法"><a href="#基本用法" class="headerlink" title="基本用法"></a>基本用法</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> PI = <span class="number">3.14159</span>;</span><br><span class="line"><span class="built_in">console</span>.log(PI); <span class="comment">// 3.14159</span></span><br><span class="line"></span><br><span class="line">PI = <span class="number">3.14</span>; <span class="comment">// TypeError: Assignment to constant variable</span></span><br></pre></td></tr></table></figure>
+
+<p><code>const</code> 声明时，必须立即进行初始化，不能进行赋值。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cosnt PI; <span class="comment">// 报错 SyntaxError</span></span><br></pre></td></tr></table></figure>
+
+<p><code>const</code> 只声明，不赋值就会报错。</p>
+<p><code>const</code> 作用域与 <code>let</code> 相同：只在声明所在的块级作用域内有效。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="keyword">const</span> PI = <span class="number">3.14159</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(PI); <span class="comment">//Uncaught ReferenceError</span></span><br></pre></td></tr></table></figure>
+
+<p><code>const</code> 命令也不存在变量提升，但是存在暂时性死区，只能在声明后使用。</p>
+<p>与 <code>let</code> 一样，不可进行重复声明。</p>
+<h3 id="本质"><a href="#本质" class="headerlink" title="本质"></a>本质</h3><p>首先，我们来看一个对象的例子：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> obj = &#123;&#125;;</span><br><span class="line">obj.prop = <span class="number">1</span>;</span><br><span class="line"><span class="built_in">console</span>.log(obj.prop); <span class="comment">// 1</span></span><br><span class="line"></span><br><span class="line">obj = &#123;&#125;; <span class="comment">// TypeError</span></span><br></pre></td></tr></table></figure>
+
+<p>由上面可以看出，常量 <code>obj</code> 储存的是一个地址，这个地址指向一个对象。不可变的只是这个地址，即不能把 obj 指向另一个地址，但对象本身是可变的，所以依然可以添加新属性。</p>
+<p>再来看一个数组的例子：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> arr = [];</span><br><span class="line">arr.push(<span class="number">1</span>);</span><br><span class="line"><span class="built_in">console</span>.log(arr); <span class="comment">// 1</span></span><br><span class="line"></span><br><span class="line">arr = [];</span><br></pre></td></tr></table></figure>
+
+<p>同对象，常量 <code>arr</code> 是一个数组，这个数组本身是可写的，但是如果将另一个数组赋值给 <code>arr</code>，就会报错。</p>
+<p>由此可见</p>
+<ul>
+<li><p><code>const</code> 保证的 实际上并不是变量的值不改动，而是变量指向的那个内存地址所保存的数据不得改动。</p>
+</li>
+<li><p><code>const</code> 只能保证这个指针式固定的，至于他指向的数据结构是不是可变的，就完全不能控制了。</p>
+</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/ES-6/" rel="tag"># ES 6</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2022/01/18/Blog-ES-6-1-%E4%BA%86%E8%A7%A3ES-6/" rel="prev" title="ES 6 系列之了解ES 6">
+                  <i class="fa fa-chevron-left"></i> ES 6 系列之了解ES 6
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2022/01/18/Blog-ES-6-3-%E5%8F%98%E9%87%8F%E7%9A%84%E8%A7%A3%E6%9E%84%E8%B5%8B%E5%80%BC/" rel="next" title="ES 6 系列之变量的解构赋值">
+                  ES 6 系列之变量的解构赋值 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">hzzzzzzzq</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>
