@@ -234,9 +234,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2022-01-18 12:57:59 / 修改时间：13:00:49" itemprop="dateCreated datePublished" datetime="2022-01-18T12:57:59+08:00">2022-01-18</time>
+      <time title="创建时间：2022-01-18 12:57:59" itemprop="dateCreated datePublished" datetime="2022-01-18T12:57:59+08:00">2022-01-18</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-01-19 13:52:24" itemprop="dateModified" datetime="2022-01-19T13:52:24+08:00">2022-01-19</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -273,60 +279,15 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h2 id="函数参数默认值"><a href="#函数参数默认值" class="headerlink" title="函数参数默认值"></a>函数参数默认值</h2><h3 id="基本用法"><a href="#基本用法" class="headerlink" title="基本用法"></a>基本用法</h3><p>我们来介绍一下函数的默认值，在 ES6 之前，不能直接为函数的参数指定默认值，只能采用变通的方式。</p>
-<p>我们先来看看 ES6 之前怎么给函数参数添加默认值</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">add</span>(<span class="params">x, y</span>) </span>&#123;</span><br><span class="line">  y = y || <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">return</span> x + y;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(add(<span class="number">1</span>)); <span class="comment">// 2</span></span><br><span class="line"><span class="built_in">console</span>.log(add(<span class="number">1</span>, <span class="number">2</span>)); <span class="comment">// 3</span></span><br></pre></td></tr></table></figure>
-
-<p>我们做的是检查 <code>y</code> 的值有没有传入，如果没有则会默认被赋值为 <code>1</code>。这种方式是有缺点的，如果传入的值为<strong>布尔值 <code>false</code><strong>，那么传入的值会变得无效。</strong>空字符串</strong>也是会有布尔值 <code>false</code> 一样的结果。</p>
-<p>那么现在我们来看看 ES6 允许设置默认值的写法吧</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">add</span>(<span class="params">x = <span class="number">1</span>, y = <span class="number">2</span></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> x + y;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(add()); <span class="comment">// 3</span></span><br><span class="line"><span class="built_in">console</span>.log(add(<span class="number">3</span>)); <span class="comment">// 5</span></span><br><span class="line"><span class="built_in">console</span>.log(add(<span class="number">2</span>, <span class="number">3</span>)); <span class="comment">// 5</span></span><br></pre></td></tr></table></figure>
-
-<p>从上面的代码就可以看到，一眼就可以<strong>判断出参数是否可省略，且写法比 <code>ES5</code> 简洁许多</strong></p>
-<blockquote>
-<p>注意：</p>
-<ul>
-<li>函数的参数变量是默认声明的，所以不能使用 let 或者 const 再次声明。</li>
-<li>参数默认值的位置，必须是在函数的尾部，如果不是在尾部，否则是没法省略的。</li>
-</ul>
-</blockquote>
-<h3 id="解构赋值与默认值结合使用"><a href="#解构赋值与默认值结合使用" class="headerlink" title="解构赋值与默认值结合使用"></a><strong>解构赋值与默认值结合使用</strong></h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">add</span>(<span class="params">[x, y] = [<span class="number">1</span>, <span class="number">2</span>]</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> x + y;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>来我们还是先用 <code>add</code> 函数来举例，上面就是用的数组的解构赋值，可以个传入的数组进行解构赋值，默认解构赋值。</p>
-<h3 id="函数的-length"><a href="#函数的-length" class="headerlink" title="函数的 length"></a>函数的 length</h3><p>很奇怪吧，函数居然能有 <code>length</code>，来我们在这里简单提一下函数的 <code>length</code> 是什么。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="function"><span class="keyword">function</span> (<span class="params">x</span>) </span>&#123;&#125;.length); <span class="comment">// 1</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="function"><span class="keyword">function</span> (<span class="params">x = <span class="number">1</span></span>) </span>&#123;&#125;.length); <span class="comment">// 0</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="function"><span class="keyword">function</span> (<span class="params">x, y, z = <span class="number">2</span></span>) </span>&#123;&#125;.length); <span class="comment">// 2</span></span><br></pre></td></tr></table></figure>
-
-<p>没错，就是这样。它的 <code>length</code> 就是函数必须传入的参数，也就是函数的所有参数减去制定了默认值的参数个数。 如果设置了默认值的参数不是尾参数，那么 <code>length</code> 属性也不再计入后面的参数了。</p>
-<h3 id="作用域"><a href="#作用域" class="headerlink" title="作用域"></a>作用域</h3><hr>
-<h2 id="rest-参数"><a href="#rest-参数" class="headerlink" title="rest 参数"></a>rest 参数</h2><p>ES6 中引入来 <code>rest</code> 参数（形式为 <code>...变量名</code> ），用于获取函数的多余参数，替代 <code>arguments</code> 对象。</p>
-<p>我们还是那 <code>add</code> 函数来举例吧。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">add</span>(<span class="params">...values</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> sum = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> num <span class="keyword">of</span> values) &#123;</span><br><span class="line">    sum += num;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> sum;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(add(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>)); <span class="comment">// 15</span></span><br></pre></td></tr></table></figure>
-
-<p>这里就可以看出来，<code>rest</code> 参数是做什么用的，使用它之后，参数可以无限传入，不限制定量。</p>
-<p>函数的 <code>length</code> 不包括 <code>rest</code> 参数。</p>
-<hr>
-<h2 id="箭头函数"><a href="#箭头函数" class="headerlink" title="箭头函数"></a>箭头函数</h2><h3 id="基本使用"><a href="#基本使用" class="headerlink" title="基本使用"></a>基本使用</h3><p>我们来看看 ES6 中增加的箭头函数( <code>=&gt;</code> )，来我们还是用 <code>add</code> 函数来举例子，</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">add</span>(<span class="params">a, b</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> a + b;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 等价于</span></span><br><span class="line"><span class="keyword">const</span> add = <span class="function">(<span class="params">a, b</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> a + b;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>来看看更简单的写法</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">multiply</span>(<span class="params">n</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> n * n;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 等价于</span></span><br><span class="line"><span class="keyword">const</span> multiply = <span class="function">(<span class="params">n</span>) =&gt;</span> n * n;</span><br></pre></td></tr></table></figure>
-
-<p>有时候 <code>return</code> 可以省略。</p>
-<p>当然，箭头函数可以<strong>嵌套</strong>使用，会大大增加代码量</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">add</span>(<span class="params">x</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params">y</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params">z</span>) </span>&#123;</span><br><span class="line">      <span class="keyword">return</span> x + y + z;</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>上面是普通的写法，然后我们来看一下箭头函数的写法</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> add = <span class="function">(<span class="params">x</span>) =&gt;</span> <span class="function">(<span class="params">y</span>) =&gt;</span> <span class="function">(<span class="params">z</span>) =&gt;</span> x + y + z;</span><br></pre></td></tr></table></figure>
-
-<p>对比一下，应该就知道啦，两种的写法简便程度差别真的很大。</p>
-<h3 id="注意点"><a href="#注意点" class="headerlink" title="注意点"></a>注意点</h3><p>在这里，稍微提一下箭头函数的相关注意点：</p>
-<ul>
-<li>箭头函数没有自己的 <code>this</code> 对象</li>
-<li>不可以当作构造函数，即不可使用 <code>new</code> 命令</li>
-<li>不可以使用 <code>arguments</code> 对象，不存在该对象，但是可以使用 <code>rest</code> 参数代替</li>
-<li>不可以使用 <code>yield</code> 命令，因此箭头函数不能使用 <code>Generator</code> 函数</li>
-</ul>
-<p>在这里不特点讲述，如果想要具体了解，可以看一下我的另一篇文章<a href="">Javasctip - this 指向</a>，文章后续补齐。</p>
-
+          <p>ES 6 系列的第四篇文章，函数的扩展，我们来看看 ES 6 中函数有哪些变化吧！</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2022/01/18/Blog-ES-6-5-%E5%87%BD%E6%95%B0%E7%9A%84%E6%89%A9%E5%B1%95/">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -375,9 +336,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2022-01-18 12:57:41 / 修改时间：13:00:45" itemprop="dateCreated datePublished" datetime="2022-01-18T12:57:41+08:00">2022-01-18</time>
+      <time title="创建时间：2022-01-18 12:57:41" itemprop="dateCreated datePublished" datetime="2022-01-18T12:57:41+08:00">2022-01-18</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-01-19 13:51:54" itemprop="dateModified" datetime="2022-01-19T13:51:54+08:00">2022-01-19</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -414,69 +381,15 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h2 id="字符串的遍历"><a href="#字符串的遍历" class="headerlink" title="字符串的遍历"></a>字符串的遍历</h2><p>ES6 中添加了字符串的遍历器接口，字符串就可以使用 <code>for...of</code> 来遍历了。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> s = <span class="string">&#x27;Hello&#x27;</span>;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> c <span class="keyword">of</span> s) &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(c); <span class="comment">// H e l l o</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="JSON-stringify-和-JSON-parse"><a href="#JSON-stringify-和-JSON-parse" class="headerlink" title="JSON.stringify() 和 JSON.parse()"></a><code>JSON.stringify()</code> 和 <code>JSON.parse()</code></h2><p>在有时候，我们需要将一个 <code>JSON</code> 格式的数据，转成字符串进行页面传递。<br>所以这时候采用 <code>JSON.stringify()</code> 进行序列化。然后传递，在目的页面使用 <code>JSON.parse()</code> 转为 <code>JavaScript</code> 对象。在进行大数据传递时，时常需要。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> person = &#123;</span><br><span class="line">  <span class="attr">name</span>: <span class="string">&#x27;hzzzzzzzq&#x27;</span>,</span><br><span class="line">  <span class="attr">age</span>: <span class="number">18</span>,</span><br><span class="line">  <span class="attr">height</span>: <span class="number">1.8</span>,</span><br><span class="line">  <span class="attr">weight</span>: <span class="number">140</span>,</span><br><span class="line">  <span class="attr">skills</span>: [<span class="string">&#x27;JavaScript&#x27;</span>],</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">let</span> s = <span class="built_in">JSON</span>.stringify(person);</span><br><span class="line"><span class="built_in">console</span>.log(s);</span><br><span class="line"><span class="comment">// &#123;&quot;name&quot;:&quot;hzzzzzzzq&quot;,&quot;age&quot;:18,&quot;height&quot;:1.8,&quot;weight&quot;:140,&quot;skills&quot;:[&quot;JavaScript&quot;]&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> str = <span class="built_in">JSON</span>.parse(s);</span><br><span class="line"><span class="built_in">console</span>.log(str);</span><br><span class="line"><span class="comment">// &#123;</span></span><br><span class="line"><span class="comment">//  &quot;name&quot;: &quot;hzzzzzzzq&quot;,</span></span><br><span class="line"><span class="comment">//  &quot;age&quot;: 18,</span></span><br><span class="line"><span class="comment">//  &quot;height&quot;: 1.8,</span></span><br><span class="line"><span class="comment">//  &quot;weight&quot;: 140,</span></span><br><span class="line"><span class="comment">//  &quot;skills&quot;: [</span></span><br><span class="line"><span class="comment">//     &quot;JavaScript&quot;</span></span><br><span class="line"><span class="comment">//   ]</span></span><br><span class="line"><span class="comment">// &#125;</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="模版字符串"><a href="#模版字符串" class="headerlink" title="模版字符串"></a>模版字符串</h2><p>什么是模版字符串呢？简单来说，其实就是加强版的字符串，使用 ( <strong>`</strong> )作为标识符 。可以作为普通的字符串使用，也可以用来定义多行字符串，或者在字符串中使用变量。</p>
-<p>我们来看看使用普通字符串时 是怎么进行换行，或者加入变量的。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> name = <span class="string">&#x27;hzzzzzzzq&#x27;</span>;</span><br><span class="line"><span class="keyword">let</span> age = <span class="number">18</span>;</span><br><span class="line"><span class="keyword">let</span> info = <span class="string">&#x27;my name is &#x27;</span> + name + <span class="string">&#x27;\n my age is &#x27;</span> + age;</span><br><span class="line"><span class="built_in">console</span>.log(info);</span><br><span class="line"><span class="comment">// my name is hzzzzzzzq</span></span><br><span class="line"><span class="comment">// my age is 18</span></span><br></pre></td></tr></table></figure>
-
-<p>然后我们再来看看模版字符串的写法。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> name = <span class="string">&#x27;hzzzzzzzq&#x27;</span>;</span><br><span class="line"><span class="keyword">let</span> age = <span class="number">18</span>;</span><br><span class="line"><span class="keyword">let</span> info = <span class="string">`my name is <span class="subst">$&#123;name&#125;</span></span></span><br><span class="line"><span class="string">my age is <span class="subst">$&#123;age&#125;</span>`</span>;</span><br><span class="line"><span class="built_in">console</span>.log(info);</span><br><span class="line"><span class="comment">// my name is hzzzzzzzq</span></span><br><span class="line"><span class="comment">// my age is 18</span></span><br></pre></td></tr></table></figure>
-
-<p>换行，直接就使用回车就可以换行，你输入的样子是怎样的，打印基本上就是怎样的。</p>
-<p>变量采用 <code>$&#123;&#125;</code> 来嵌入，也可以直接写入一个字符串中，少写了许多没必要的 <code>+</code> 号。</p>
-<h2 id="字符串中的新增方法"><a href="#字符串中的新增方法" class="headerlink" title="字符串中的新增方法"></a>字符串中的新增方法</h2><p>在这里就列举一些常用的实例方法</p>
-<h3 id="includes"><a href="#includes" class="headerlink" title="includes()"></a>includes()</h3><p><code>includes()</code> 实例方法，返回的是一个布尔值（<code>true</code>和<code>false</code>），<strong>表示是否找到了参数字符串</strong>。<br>参数二来表示开始搜索的位置。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> s = <span class="string">&#x27;Hello hzzzzzzzq&#x27;</span>;</span><br><span class="line"><span class="built_in">console</span>.log(s.includes(<span class="string">&#x27;Hello&#x27;</span>)); <span class="comment">// true</span></span><br><span class="line"><span class="built_in">console</span>.log(s.includes(<span class="string">&#x27;x&#x27;</span>)); <span class="comment">// false</span></span><br><span class="line"><span class="built_in">console</span>.log(s.includes(<span class="string">&#x27;zzzzzzz&#x27;</span>)); <span class="comment">// true</span></span><br><span class="line"><span class="built_in">console</span>.log(s.includes(<span class="string">&#x27;H&#x27;</span>, <span class="number">2</span>)); <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="startsWith-、endsWith"><a href="#startsWith-、endsWith" class="headerlink" title="startsWith()、endsWith()"></a>startsWith()、endsWith()</h3><ul>
-<li><strong>startsWith()</strong><br><code>startsWith()</code> 返回也是布尔值，<strong>表示参数是否在原字符串的头部</strong>。<br>第二参数也表示开始搜索的位置。</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> s = <span class="string">&#x27;Hello hzzzzzzzq&#x27;</span>;</span><br><span class="line"><span class="built_in">console</span>.log(s.startsWith(<span class="string">&#x27;Hello&#x27;</span>)); <span class="comment">// true</span></span><br><span class="line"><span class="built_in">console</span>.log(s.startsWith(<span class="string">&#x27;e&#x27;</span>)); <span class="comment">// false</span></span><br><span class="line"><span class="comment">// 表示从 1 开始</span></span><br><span class="line"><span class="built_in">console</span>.log(s.startsWith(<span class="string">&#x27;Hello&#x27;</span>, <span class="number">1</span>)); <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><strong>endsWith()</strong><br><code>endsWith()</code> 返回也是布尔值，<strong>表示参数是否在原字符串的尾部</strong>。<br>注意：这里的第二参数表示的是到 n 为止，不像 <code>startsWith()</code> 是从 <code>n</code> 开始到字符串结尾。</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> s = <span class="string">&#x27;Hello hzzzzzzzq&#x27;</span>;</span><br><span class="line"><span class="built_in">console</span>.log(s.endsWith(<span class="string">&#x27;q&#x27;</span>)); <span class="comment">// true</span></span><br><span class="line"><span class="built_in">console</span>.log(s.endsWith(<span class="string">&#x27;zzzzq&#x27;</span>)); <span class="comment">// true</span></span><br><span class="line"><span class="comment">// 表示看前 5 个字符</span></span><br><span class="line"><span class="built_in">console</span>.log(s.endsWith(<span class="string">&#x27;o&#x27;</span>, <span class="number">5</span>)); <span class="comment">// true</span></span><br><span class="line"><span class="comment">// 表示看前 4 个字符</span></span><br><span class="line"><span class="built_in">console</span>.log(s.endsWith(<span class="string">&#x27;o&#x27;</span>, <span class="number">4</span>)); <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="repeat"><a href="#repeat" class="headerlink" title="repeat()"></a>repeat()</h3><p><code>repeat()</code> 返回一个新字符串，表示将原字符串重复 <code>n</code> 次。</p>
-<ul>
-<li>如果传入的是小数，则会往下取整。</li>
-<li>传入参数不能是 <code>Infinity</code> 和 小于 <code>-1</code> 的值</li>
-<li><code>0</code> 到 <code>-1</code> 之间的小数，则按照等同于 <code>0</code> 来计算。</li>
-<li><code>NaN</code> 会被转为 <code>0</code></li>
-<li>参数是字符串则先转为数字，如果不能转为数字，则为 <code>0</code></li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> s = <span class="string">&#x27;a&#x27;</span>;</span><br><span class="line"><span class="built_in">console</span>.log(s.repeat(<span class="number">4</span>)); <span class="comment">// &#x27;aaaa&#x27;</span></span><br><span class="line"><span class="built_in">console</span>.log(s.repeat(<span class="number">3.6</span>)); <span class="comment">// &#x27;aaa&#x27;</span></span><br><span class="line"><span class="built_in">console</span>.log(s.repeat(-<span class="number">0.6</span>)); <span class="comment">// &#x27;&#x27;</span></span><br><span class="line"><span class="built_in">console</span>.log(s.repeat(<span class="string">&#x27;aaa&#x27;</span>)); <span class="comment">// &#x27;&#x27;</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="padStart、padEnd"><a href="#padStart、padEnd" class="headerlink" title="padStart、padEnd()"></a>padStart、padEnd()</h3><p>两个实例方法，就是用于字符串的补齐。<br><strong>第一参数表示想要字符串的长度，第二参数表示字符串没达到第一参数时使用参数二字符串进行补齐。</strong></p>
-<ul>
-<li><strong>padStart()</strong><br>很明显，<code>Start</code>，就是在字符串的头部补全。</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> s = <span class="string">&#x27;aaa&#x27;</span>;</span><br><span class="line"><span class="comment">// 如果原长度大于或等于想要补齐长度，则不生效。</span></span><br><span class="line"><span class="built_in">console</span>.log(s.padStart(<span class="number">2</span>, <span class="string">&#x27;b&#x27;</span>)); <span class="comment">// aaa</span></span><br><span class="line"><span class="built_in">console</span>.log(s.padStart(<span class="number">10</span>, <span class="string">&#x27;b&#x27;</span>)); <span class="comment">// bbbbbbbaaa</span></span><br><span class="line"><span class="comment">// 如果补齐字符串长度大于剩余格数，则会省略后面字符串</span></span><br><span class="line"><span class="built_in">console</span>.log(s.padStart(<span class="number">4</span>, <span class="string">&#x27;bcde&#x27;</span>)); <span class="comment">// baaa</span></span><br><span class="line"><span class="comment">// 如果，第二参数无内容，则使用空格补齐</span></span><br><span class="line"><span class="built_in">console</span>.log(s.padStart(<span class="number">4</span>)); <span class="comment">// &#x27; aaa&#x27;</span></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><strong>padEnd()</strong><br><code>End</code> 就是在字符串的尾部补全。</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> s = <span class="string">&#x27;aaa&#x27;</span>;</span><br><span class="line"><span class="comment">// 如果原长度大于或等于想要补齐长度，则不生效。</span></span><br><span class="line"><span class="built_in">console</span>.log(s.padEnd(<span class="number">2</span>, <span class="string">&#x27;b&#x27;</span>)); <span class="comment">// aaa</span></span><br><span class="line"><span class="built_in">console</span>.log(s.padEnd(<span class="number">10</span>, <span class="string">&#x27;b&#x27;</span>)); <span class="comment">// aaabbbbbbb</span></span><br><span class="line"><span class="comment">// 如果补齐字符串长度大于剩余格数，则会省略后面字符串</span></span><br><span class="line"><span class="built_in">console</span>.log(s.padEnd(<span class="number">4</span>, <span class="string">&#x27;bcde&#x27;</span>)); <span class="comment">// aaab</span></span><br><span class="line"><span class="comment">// 如果，第二参数无内容，则使用空格补齐</span></span><br><span class="line"><span class="built_in">console</span>.log(s.padEnd(<span class="number">4</span>)); <span class="comment">// &#x27;aaa &#x27;</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="trimStart-、trimEnd"><a href="#trimStart-、trimEnd" class="headerlink" title="trimStart()、trimEnd()"></a>trimStart()、trimEnd()</h3><p>这两个实例都是用来<strong>去除字符串空格用的</strong>。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> s = <span class="string">&#x27;   x   &#x27;</span>;</span><br><span class="line"><span class="comment">// start 去除前面空格</span></span><br><span class="line"><span class="built_in">console</span>.log(s.trimStart()); <span class="comment">// &#x27;x   &#x27;</span></span><br><span class="line"><span class="comment">// end 去除后面空格</span></span><br><span class="line"><span class="built_in">console</span>.log(s.trimEnd()); <span class="comment">// &#x27;   x&#x27;</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="replaceAll"><a href="#replaceAll" class="headerlink" title="replaceAll()"></a>replaceAll()</h3><p><code>replaceAll()</code> 实例方法是用来替换字符串中的字符用的。</p>
-<p>在提到这个之前，我们先看看 <code>replace()</code> ，<strong>参数一是被替换的值，参数二是替换值</strong>，简单来讲就是，<strong>参数二用来替换参数一</strong>。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> s = <span class="string">&#x27;abcabc&#x27;</span>;</span><br><span class="line"><span class="built_in">console</span>.log(s.replace(<span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;x&#x27;</span>)); <span class="comment">// xbcabc</span></span><br></pre></td></tr></table></figure>
-
-<p><code>replace()</code> 只能替代一个，是第一个遇到的。</p>
-<p>那我们来看看 <code>replaceAll()</code>，是全部替换。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> s = <span class="string">&#x27;abcabc&#x27;</span>;</span><br><span class="line"><span class="built_in">console</span>.log(s.replaceAll(<span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;x&#x27;</span>)); <span class="comment">// xbcxbc</span></span><br></pre></td></tr></table></figure>
-
-<p>这里是简单的用法，当然在 <code>replaceAll()</code> 第二参数还可以传入一个函数，具体可以看看 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/String/replaceAll">MDN 的 replaceAll()</a></p>
-
+          <p>ES 6 系列的第三篇文章，字符串的扩展，我们来看看 ES 6 中对字符串的扩展吧！</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2022/01/18/Blog-ES-6-4-%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E6%89%A9%E5%B1%95/">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -525,9 +438,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2022-01-18 12:55:45 / 修改时间：13:00:42" itemprop="dateCreated datePublished" datetime="2022-01-18T12:55:45+08:00">2022-01-18</time>
+      <time title="创建时间：2022-01-18 12:55:45" itemprop="dateCreated datePublished" datetime="2022-01-18T12:55:45+08:00">2022-01-18</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-01-19 13:51:25" itemprop="dateModified" datetime="2022-01-19T13:51:25+08:00">2022-01-19</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -564,74 +483,15 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>解构赋值：ES6 允许按照一定模式，从数组、字符串和对象中提取值，对变量进行赋值</p>
-<p>我们来看一下以前赋值的方式</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">let</span> b = <span class="number">2</span>;</span><br></pre></td></tr></table></figure>
-
-<p>那么现在我们来初步了解一下解构赋值</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> [a, b] = [<span class="number">1</span>, <span class="number">2</span>];</span><br></pre></td></tr></table></figure>
-
-<p>上面两段代码的赋值结果是相同的。</p>
-<hr>
-<h2 id="数组的解构赋值"><a href="#数组的解构赋值" class="headerlink" title="数组的解构赋值"></a>数组的解构赋值</h2><h3 id="基本使用"><a href="#基本使用" class="headerlink" title="基本使用"></a>基本使用</h3><p>我们来看看数组的解构赋值，在上面中，我们使用了数组的解构赋值，来举例子。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> [a, b, c, d] = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>];</span><br></pre></td></tr></table></figure>
-
-<p>这样操作之后，就可以从数组中提取到相应的值，<strong>按照对应位置，对变量赋值</strong>。</p>
-<p>本质上，也就是模式的匹配，只要等号两边的模式相同，左边的变量就会被赋予对应的值。</p>
-<p>我们来多举例</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 例子1</span></span><br><span class="line"><span class="keyword">let</span> [a, [b], [c]] = [<span class="number">1</span>, [<span class="number">2</span>], [<span class="number">3</span>]];</span><br><span class="line"><span class="built_in">console</span>.log(a); <span class="comment">// 1</span></span><br><span class="line"><span class="built_in">console</span>.log(b); <span class="comment">// 2</span></span><br><span class="line"><span class="built_in">console</span>.log(c); <span class="comment">// 3</span></span><br></pre></td></tr></table></figure>
-
-<p>从 <code>例子1</code> 中可以看出，这是一种嵌套数组取值方式，可以看出，数组的解构赋值，可以进行嵌套取值。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 例子2</span></span><br><span class="line"><span class="keyword">let</span> [, a] = [<span class="number">1</span>, <span class="number">2</span>];</span><br><span class="line"><span class="built_in">console</span>.log(a); <span class="comment">// 2</span></span><br></pre></td></tr></table></figure>
-
-<p>从 <code>例子2</code> 来看，就证明了数组赋值解构说的这句话，<strong>按照对应的值，对变量进行赋值</strong>，而不是每次都从第一个开始取。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 例子3</span></span><br><span class="line"><span class="keyword">let</span> [a, ...arr] = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>];</span><br><span class="line"><span class="built_in">console</span>.log(a); <span class="comment">// 1</span></span><br><span class="line"><span class="built_in">console</span>.log(arr); <span class="comment">// [2, 3, 4];</span></span><br></pre></td></tr></table></figure>
-
-<p>从 <code>例子3</code> 来看，我们也可以用 <a target="_blank" rel="noopener" href="https://github.com/hzzzzzzzq/Blog/issues/7">扩展运算符</a> 这里需要一个扩展运算符的项目，来同时将后面的值放到一个数组中。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 例子4</span></span><br><span class="line"><span class="keyword">let</span> [a, b, ...arr] = [<span class="number">1</span>];</span><br><span class="line"><span class="built_in">console</span>.log(a); <span class="comment">// 1</span></span><br><span class="line"><span class="built_in">console</span>.log(b); <span class="comment">// undefined</span></span><br><span class="line"><span class="built_in">console</span>.log(arr); <span class="comment">// []</span></span><br></pre></td></tr></table></figure>
-
-<p>从 <code>例子4</code> 来看，我们能发现，如果在右侧找不到值时，就是解构不成功，这时候如果是单变量，则会等于 <a href="%E6%95%B0%E6%8D%AE%E5%9F%BA%E6%9C%AC%E7%BB%93%E6%9E%84"><code>undefined</code></a>，如果是使用了 <a target="_blank" rel="noopener" href="https://github.com/hzzzzzzzq/Blog/issues/7">扩展运算符</a> 的变量，则是空数组。</p>
-<h3 id="默认值"><a href="#默认值" class="headerlink" title="默认值"></a>默认值</h3><p>接下来，我们来看一下解构赋值中指定默认值</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 例子5</span></span><br><span class="line"><span class="keyword">let</span> [a = <span class="number">10</span>] = [];</span><br><span class="line"><span class="built_in">console</span>.log(a); <span class="comment">// 10</span></span><br></pre></td></tr></table></figure>
-
-<p>在上面的 <code>例子5</code> 中，可以看到，<code>a</code> 对应的右侧是解构失败的，值应该为 <code>undefined</code>，但是输出是 <code>10</code>，这就是因为<strong>解构赋值中允许指定默认值</strong></p>
-<p>但是默认值是有生效条件的：<strong>只有当一个数组成员严格等于 <code>undefined</code> 时，默认值才会生效</strong>。</p>
-<blockquote>
-<p>ES6 中的严格相等运算符( <code>===</code> )，可以判断一个位置是否有值。</p>
-</blockquote>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 例子6</span></span><br><span class="line"><span class="keyword">let</span> [a = <span class="number">1</span>, b = <span class="number">2</span>, c = <span class="number">3</span>] = [<span class="number">10</span>, <span class="literal">null</span>, <span class="literal">undefined</span>];</span><br><span class="line"><span class="built_in">console</span>.log(a); <span class="comment">// 10</span></span><br><span class="line"><span class="built_in">console</span>.log(b); <span class="comment">// null</span></span><br><span class="line"><span class="built_in">console</span>.log(c); <span class="comment">// 3</span></span><br></pre></td></tr></table></figure>
-
-<p>在 <code>例子6</code> 中，就可以看出只有当右侧的值严格相等于 <code>undefined</code> 时，默认值才会生效。</p>
-<hr>
-<h2 id="对象的解构赋值"><a href="#对象的解构赋值" class="headerlink" title="对象的解构赋值"></a>对象的解构赋值</h2><p>解构赋值并不只是在数组中，在对象中也可以。</p>
-<h3 id="基本使用-1"><a href="#基本使用-1" class="headerlink" title="基本使用"></a>基本使用</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 例子7</span></span><br><span class="line"><span class="keyword">let</span> &#123; a, b &#125; = &#123; <span class="attr">a</span>: <span class="string">&#x27;aaa&#x27;</span>, <span class="attr">b</span>: <span class="string">&#x27;bbb&#x27;</span> &#125;;</span><br><span class="line"><span class="built_in">console</span>.log(a); <span class="comment">// &#x27;aaa&#x27;</span></span><br><span class="line"><span class="built_in">console</span>.log(b); <span class="comment">// &#x27;bbb&#x27;</span></span><br></pre></td></tr></table></figure>
-
-<p>从 <code>例子7</code> 中，我们可以看出对象的解构赋值与数组的解构赋值的一个重要的不同点。数组元素是按照对应的下标次序来排列的，但是在对象中，变量必须与属性同名，才可以取到正确的值</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 例子8</span></span><br><span class="line"><span class="keyword">let</span> &#123; b, c &#125; = &#123; <span class="attr">a</span>: <span class="string">&#x27;aaa&#x27;</span>, <span class="attr">b</span>: <span class="string">&#x27;bbb&#x27;</span> &#125;;</span><br><span class="line"><span class="built_in">console</span>.log(b); <span class="comment">// &#x27;bbb&#x27;</span></span><br><span class="line"><span class="built_in">console</span>.log(c); <span class="comment">// undefined</span></span><br></pre></td></tr></table></figure>
-
-<p>从 <code>例子8</code> 中，我们可以看到，对象的解构赋值，变量必须与属性同名，且并不是按照次序来对应的。同数组，解构失败时，变量的值等于 <code>undefined</code>。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 例子9</span></span><br><span class="line"><span class="keyword">let</span> &#123;</span><br><span class="line">  <span class="attr">a</span>: &#123; b &#125;,</span><br><span class="line">&#125; = &#123; <span class="attr">a</span>: &#123; <span class="attr">b</span>: <span class="number">20</span> &#125; &#125;;</span><br><span class="line"><span class="built_in">console</span>.log(b); <span class="comment">// 20</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 例子10</span></span><br><span class="line"><span class="keyword">let</span> &#123; a &#125; = &#123; <span class="attr">a</span>: &#123; <span class="attr">b</span>: <span class="number">20</span> &#125; &#125;;</span><br></pre></td></tr></table></figure>
-
-<p>从 <code>例子9</code> 中，我们可以看到，对象的解构赋值，也是同数组一样，可以进行嵌套取值。</p>
-<blockquote>
-<p>注意：在这里 <code>例子9</code> 中左侧的 <code>a</code> 是模式，不是变量，因此不会被赋值，如果想要 <code>a</code> 也被赋值，可以使用 <code>例子10</code> 的写法</p>
-</blockquote>
-<h3 id="默认值-1"><a href="#默认值-1" class="headerlink" title="默认值"></a>默认值</h3><p>我们在数组解构赋值中，可以使用默认值，那么在对象中，是不是也有呢？</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 例子11</span></span><br><span class="line"><span class="keyword">let</span> &#123; a = <span class="number">1</span> &#125; = &#123;&#125;;</span><br><span class="line"><span class="built_in">console</span>.log(a); <span class="comment">// 1</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 例子12</span></span><br><span class="line"><span class="keyword">let</span> &#123; a, b = <span class="number">2</span> &#125; = &#123; <span class="attr">a</span>: <span class="number">1</span> &#125;;</span><br><span class="line"><span class="built_in">console</span>.log(a); <span class="comment">// 1</span></span><br><span class="line"><span class="built_in">console</span>.log(b); <span class="comment">// 2</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 例子13</span></span><br><span class="line"><span class="keyword">let</span> &#123; <span class="attr">a</span>: b = <span class="number">1</span> &#125; = &#123;&#125;;</span><br><span class="line"><span class="built_in">console</span>.log(b); <span class="comment">// 1</span></span><br></pre></td></tr></table></figure>
-
-<p>从 <code>例子11</code>、<code>例子12</code>、<code>例子13</code>，可以看出，其实对象的默认值与数组的默认值是类似的。</p>
-<hr>
-<h2 id="字符串的解构赋值"><a href="#字符串的解构赋值" class="headerlink" title="字符串的解构赋值"></a>字符串的解构赋值</h2><p>字符串也是可以进行解构赋值的，其实就是相当于将字符串转化成一个类似数组的对象。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 例子14</span></span><br><span class="line"><span class="keyword">let</span> [a, b, c, d, e] = <span class="string">&#x27;hello&#x27;</span>;</span><br><span class="line"><span class="built_in">console</span>.log(a); <span class="comment">// &#x27;h&#x27;</span></span><br><span class="line"><span class="built_in">console</span>.log(b); <span class="comment">// &#x27;e&#x27;</span></span><br><span class="line"><span class="built_in">console</span>.log(c); <span class="comment">// &#x27;l&#x27;</span></span><br><span class="line"><span class="built_in">console</span>.log(d); <span class="comment">// &#x27;l&#x27;</span></span><br><span class="line"><span class="built_in">console</span>.log(e); <span class="comment">// &#x27;o&#x27;</span></span><br></pre></td></tr></table></figure>
-
-<p>从 <code>例子14</code> 来看，就可以明白了，数组的解构赋值相当于被转化成一个类数组的对象进行解构赋值。</p>
-<hr>
-<h2 id="函数参数的解构赋值"><a href="#函数参数的解构赋值" class="headerlink" title="函数参数的解构赋值"></a>函数参数的解构赋值</h2><p>函数的参数也是可以使用解构赋值</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 例子15</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">add</span>(<span class="params">[a, b]</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> a + b;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(add([<span class="number">1</span>, <span class="number">2</span>])); <span class="comment">// 3</span></span><br></pre></td></tr></table></figure>
-
-<p>从 <code>例子15</code> 可以看出，函数的参数是可以进行解构赋值的，既然<strong>数组</strong>可以，那么<strong>对象</strong>也可以，<strong>字符串</strong>也是。</p>
-<hr>
-
+          <p>ES 6 系列的第二篇文章，变量的解构赋值，可以了解到许多简写方式哦！</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2022/01/18/Blog-ES-6-3-%E5%8F%98%E9%87%8F%E7%9A%84%E8%A7%A3%E6%9E%84%E8%B5%8B%E5%80%BC/">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -680,9 +540,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2022-01-18 12:55:11 / 修改时间：13:00:38" itemprop="dateCreated datePublished" datetime="2022-01-18T12:55:11+08:00">2022-01-18</time>
+      <time title="创建时间：2022-01-18 12:55:11" itemprop="dateCreated datePublished" datetime="2022-01-18T12:55:11+08:00">2022-01-18</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-01-19 13:50:52" itemprop="dateModified" datetime="2022-01-19T13:50:52+08:00">2022-01-19</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -719,72 +585,15 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h2 id="let-命令"><a href="#let-命令" class="headerlink" title="let 命令"></a>let 命令</h2><h3 id="简单实用"><a href="#简单实用" class="headerlink" title="简单实用"></a><strong>简单实用</strong></h3><p>ES6 中新增了 <code>let</code> 命令，用来声明变量。使用方式同 <code>var</code> 命令，但是 <code>let</code> 命令只在所在的代码块内有效。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="keyword">let</span> a = <span class="number">10</span>;</span><br><span class="line">  <span class="keyword">var</span> b = <span class="number">10</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(a); <span class="comment">// 报错，a 为定义 ReferenceError: a is not defined</span></span><br><span class="line"><span class="built_in">console</span>.log(b); <span class="comment">// 10</span></span><br></pre></td></tr></table></figure>
-
-<p>在上面的使用案例中，我们可以看出 <code>let</code> 命令只在代码块中生效，而在代码块以外使用则无效。</p>
-<h3 id="for-循环中使用"><a href="#for-循环中使用" class="headerlink" title="for 循环中使用"></a><strong>for 循环中使用</strong></h3><p>我们来看看在 <code>for</code> 循环中使用 <code>var</code> 命令.</p>
-<p>下面这段代码，打印出来的会是什么呢？可以跑一下代码，看一下控制台。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++) &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(i);</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(i); <span class="comment">// 5</span></span><br></pre></td></tr></table></figure>
-
-<p>好了，你会发现，所有的打印都是 <code>5</code>，为什么呢？是因为 <code>var</code> 命令是在全局范围内有效，所以全局只有一个变量 <code>i</code>，每一次循环，变量 <code>i</code> 的值都会发生改变，所以当你打印是，打印的就是全局的 <code>i</code> ，也就是经过多次变化赋值的 <code>5</code>。</p>
-<p>上面代码中，我在外面打印了一下 <code>i</code> ，来证明 <code>var</code> 定义的是一个全局变量。</p>
-<p>来，让我们将 <code>var</code> 改成 <code>let</code>，现在打印的结果又是什么呢？</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++) &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(i);</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(i); <span class="comment">// ReferenceError: i is not defined</span></span><br></pre></td></tr></table></figure>
-
-<p>当然，我想很多人都猜到了结果，就是 <code>0 1 2 3 4</code> ，那么这里又是为什么呢？</p>
-<p><code>let</code> 变量只在所在的代码块内有效，在子代码块中依然有效。在上述循环中 <code>i</code> 只在本轮循环内有效，所以每一次循环的 <code>i</code> 其实都是一个新定义的变量，所以会输出当前 <code>i</code> 的值，每次循环对应输出。</p>
-<p>当然，这里可能会出现一个问题，每轮的变量都是一个新变量，那它是怎么知道上一轮循环的值的？稍做解释：<a target="_blank" rel="noopener" href="https://jsshou.cn/blog/frontend/V8study.html#%E5%89%8D%E8%A8%80">JS 引擎(v8)</a>内部会记住上一轮循环的值，初始化本轮的变量时，就在上一轮循环的基础上进行计算。</p>
-<p>上面我们说，<code>let</code> 命令在子代码块中也有效，可以从 <code>for</code> 循环上来看，<code>()</code> 内部其实就是一个父级作用域，而 <code>&#123;&#125;</code> 内部就是一个单独的子作用域。</p>
-<h3 id="不存在变量提升"><a href="#不存在变量提升" class="headerlink" title="不存在变量提升"></a>不存在变量提升</h3><p>变量提升，即变量可以在声明之前使用，值为 <code>undefined</code>，<code>var</code> 命令存在，而 <code>let</code> 命令并没有变量提升，照样，我们来看看使用的案例。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(a); <span class="comment">// undefined</span></span><br><span class="line"><span class="keyword">var</span> a = <span class="number">10</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(b); <span class="comment">// ReferenceError</span></span><br><span class="line"><span class="keyword">let</span> b = <span class="number">10</span>;</span><br></pre></td></tr></table></figure>
-
-<p>可以在控制台中跑一下这段代码，进行尝试。你会发现，<code>a</code> 变量进行了变量提升，而 <code>b</code> 变量没有发生，这表明了在声明之前使用，变量 <code>b</code> 是不存在的。</p>
-<h3 id="暂时性死区"><a href="#暂时性死区" class="headerlink" title="暂时性死区"></a>暂时性死区</h3><p><strong>代码块中，使用 <code>let</code> 命令声明变量之前，该变量都是不可用的</strong>。</p>
-<p>在外部有一个全局变量 <code>x</code>，但是在内部使用 <code>let</code> 声明了一个 <code>x</code>，于是内部的 <code>x</code> 绑定了这个代码块，不受部影响。</p>
-<p>但是在内部，声明变量之前的这个区域就是<strong>暂时性死区</strong>，我们来从下面的代码来看。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> x = <span class="number">100</span>;</span><br><span class="line"><span class="keyword">if</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">  <span class="comment">// 暂时性死区 开始点</span></span><br><span class="line">  x = <span class="number">10</span>; <span class="comment">// 报错</span></span><br><span class="line">  <span class="built_in">console</span>.log(x); <span class="comment">// 报错</span></span><br><span class="line">  <span class="keyword">let</span> x; <span class="comment">// 暂时性死区结束点</span></span><br><span class="line">  <span class="built_in">console</span>.log(X); <span class="comment">// undefined</span></span><br><span class="line"></span><br><span class="line">  x = <span class="number">20</span>;</span><br><span class="line">  <span class="built_in">console</span>.log(x); <span class="comment">// 20</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong>暂时性死区</strong>的存在，也就意味着 <code>typeof</code> 的操作会变的不安全，在没有声明变量时，使用 <code>typeof</code> 并不会报错，返回一个 <code>undefined</code>，然而因为暂时性死区，会使得 <code>typeof</code> 报错 <code>ReferenceError</code>。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="keyword">typeof</span> x); <span class="comment">// undefined</span></span><br><span class="line">  <span class="built_in">console</span>.log(<span class="keyword">typeof</span> y); <span class="comment">// ReferenceError</span></span><br><span class="line">  <span class="keyword">let</span> y;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>在<a target="_blank" rel="noopener" href="https://github.com/hzzzzzzzq/Blog/issues/6">函数默认值</a>中也存在暂时性死区，而且会不容易发现。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">add</span>(<span class="params">x = y, y = <span class="number">1</span></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> x + y;</span><br><span class="line">&#125;</span><br><span class="line">add(); <span class="comment">// ReferenceError</span></span><br></pre></td></tr></table></figure>
-
-<p>在上面的代码中，就是如此，给<a target="_blank" rel="noopener" href="https://github.com/hzzzzzzzq/Blog/issues/6">函数赋默认值</a>时，使用后面的值赋值给前面的 <code>x</code>，而这时候 <code>y</code> 还没有定义，所以会报错。</p>
-<h3 id="不允许重复声明"><a href="#不允许重复声明" class="headerlink" title="不允许重复声明"></a>不允许重复声明</h3><p><code>var</code> 变量是允许进行重复声明的，但是 <code>let</code> 变量是不允许的。</p>
-<p>来，上代码。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="number">10</span>;</span><br><span class="line"><span class="keyword">var</span> a = <span class="number">20</span>;</span><br><span class="line"><span class="built_in">console</span>.log(a); <span class="comment">// 20</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> b = <span class="number">10</span>;</span><br><span class="line"><span class="keyword">let</span> b = <span class="number">20</span>;</span><br><span class="line"><span class="built_in">console</span>.log(b); <span class="comment">// 20</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> c = <span class="number">10</span>;</span><br><span class="line"><span class="keyword">var</span> c = <span class="number">20</span>;</span><br><span class="line"><span class="comment">// 报错</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> d = <span class="number">10</span>;</span><br><span class="line"><span class="keyword">let</span> d = <span class="number">20</span>;</span><br><span class="line"><span class="comment">// 报错</span></span><br></pre></td></tr></table></figure>
-
-<hr>
-<h2 id="const-命令"><a href="#const-命令" class="headerlink" title="const 命令"></a>const 命令</h2><p><code>const</code> 命令 声明一个只读的常量。一旦声明，常量的值就不能改变</p>
-<h3 id="基本用法"><a href="#基本用法" class="headerlink" title="基本用法"></a>基本用法</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> PI = <span class="number">3.14159</span>;</span><br><span class="line"><span class="built_in">console</span>.log(PI); <span class="comment">// 3.14159</span></span><br><span class="line"></span><br><span class="line">PI = <span class="number">3.14</span>; <span class="comment">// TypeError: Assignment to constant variable</span></span><br></pre></td></tr></table></figure>
-
-<p><code>const</code> 声明时，必须立即进行初始化，不能进行赋值。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cosnt PI; <span class="comment">// 报错 SyntaxError</span></span><br></pre></td></tr></table></figure>
-
-<p><code>const</code> 只声明，不赋值就会报错。</p>
-<p><code>const</code> 作用域与 <code>let</code> 相同：只在声明所在的块级作用域内有效。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="keyword">const</span> PI = <span class="number">3.14159</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(PI); <span class="comment">//Uncaught ReferenceError</span></span><br></pre></td></tr></table></figure>
-
-<p><code>const</code> 命令也不存在变量提升，但是存在暂时性死区，只能在声明后使用。</p>
-<p>与 <code>let</code> 一样，不可进行重复声明。</p>
-<h3 id="本质"><a href="#本质" class="headerlink" title="本质"></a>本质</h3><p>首先，我们来看一个对象的例子：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> obj = &#123;&#125;;</span><br><span class="line">obj.prop = <span class="number">1</span>;</span><br><span class="line"><span class="built_in">console</span>.log(obj.prop); <span class="comment">// 1</span></span><br><span class="line"></span><br><span class="line">obj = &#123;&#125;; <span class="comment">// TypeError</span></span><br></pre></td></tr></table></figure>
-
-<p>由上面可以看出，常量 <code>obj</code> 储存的是一个地址，这个地址指向一个对象。不可变的只是这个地址，即不能把 obj 指向另一个地址，但对象本身是可变的，所以依然可以添加新属性。</p>
-<p>再来看一个数组的例子：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> arr = [];</span><br><span class="line">arr.push(<span class="number">1</span>);</span><br><span class="line"><span class="built_in">console</span>.log(arr); <span class="comment">// 1</span></span><br><span class="line"></span><br><span class="line">arr = [];</span><br></pre></td></tr></table></figure>
-
-<p>同对象，常量 <code>arr</code> 是一个数组，这个数组本身是可写的，但是如果将另一个数组赋值给 <code>arr</code>，就会报错。</p>
-<p>由此可见</p>
-<ul>
-<li><p><code>const</code> 保证的 实际上并不是变量的值不改动，而是变量指向的那个内存地址所保存的数据不得改动。</p>
-</li>
-<li><p><code>const</code> 只能保证这个指针式固定的，至于他指向的数据结构是不是可变的，就完全不能控制了。</p>
-</li>
-</ul>
-
+          <p>ES 6 系列的第一篇文章，Let 和 const 命令，让我们来细细品味吧！</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2022/01/18/Blog-ES-6-2-let-%E5%92%8C-const-%E5%91%BD%E4%BB%A4/">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -833,9 +642,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2022-01-18 12:53:37 / 修改时间：13:00:33" itemprop="dateCreated datePublished" datetime="2022-01-18T12:53:37+08:00">2022-01-18</time>
+      <time title="创建时间：2022-01-18 12:53:37" itemprop="dateCreated datePublished" datetime="2022-01-18T12:53:37+08:00">2022-01-18</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-01-19 13:49:57" itemprop="dateModified" datetime="2022-01-19T13:49:57+08:00">2022-01-19</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -873,20 +688,14 @@
     
     <div class="post-body" itemprop="articleBody">
           <p>首先呢，我们来说一下 <code>ECMAScript</code>，<code>ECMAScript</code> 是 <code>JavaScript</code> 中的语法规范。那我们来看看<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/ECMAScript"><strong>维基百科</strong>中的定义</a>。</p>
-<blockquote>
-<p>ECMAScript 是一种由 Ecma 国际（前身为欧洲计算机制造商协会）在标准 ECMA-262 中定义的脚本语言规范。这种语言在万维网上应用广泛，它往往被称为 JavaScript 或 JScript，但实际上后两者是 ECMA-262 标准的实现和扩展。</p>
-</blockquote>
-<p>那 <code>ECMAScript</code> 的主要作用是什么呢？定义了很多我们需要使用的重要的东西。</p>
-<ul>
-<li>语法： 解析规则，关键词，语句，声明，操作等</li>
-<li>类型： 布尔型，数字，字符串，对象等</li>
-<li>原型和继承</li>
-<li>内置对象和函数的标准库： JSON，Math，数组方法等等</li>
-</ul>
-<p>说完了 <code>ECMAScript</code> ，那我们就可以来看看 <code>ES 6</code> 了。<br><code>ES 6</code> 全称 <code>ECMASCript 6</code>，我们可以看出，是 <code>ECMAScript</code> 的第六版，是 <code>JavaScript</code> 的一个标准， 2015 年 6 月发版，主要目的是解决 <code>ES 5</code> 的不足。截止 2020 年 6 月已经更新至 <code>11</code> 版。</p>
-<h2 id="为什么要学习-ES-6？"><a href="#为什么要学习-ES-6？" class="headerlink" title="为什么要学习 ES 6？"></a>为什么要学习 ES 6？</h2><p>首先，<code>ES 6</code> 是 <code>ECMAScript 2015</code> 出版的一个标准，各个浏览器厂商都相当踊跃的遵循了这个标准，目前 <strong>Chrome 已经支持了超过 80% 的 <code>ES 6</code> 特性</strong>，业界流行框架类库都开始使用 <code>ES6</code> 编写。<br>从 2011 年更新了 5.1 版本之后，直到 2015 年才更新了 <code>ES 6</code>， 它已成为 <code>JavaScript</code> 有史以来最实质的一次升级，新的语言和库特性就像无主之宝，等待有识之士的发掘。新的语言特性涵盖范围甚广，小到受欢迎的语法糖，例如箭头函数和简单的字符串插值，大到复杂的新概念，例如代理、生成器和承诺(<code>Promise</code>)等。<br><code>ES 6</code> 彻底改变了我们的编写 <code>JavaScript</code> 代码方式，况且目前 <code>ES 5</code> 的使用已经很少，基本上都采用了 <code>ES 6</code> 的写法。<br>所以在这个复杂的前端时代，学习 <code>ES 6</code> 已经成为了必然。</p>
-<h2 id="如何怎么学习？"><a href="#如何怎么学习？" class="headerlink" title="如何怎么学习？"></a>如何怎么学习？</h2><p>那我们来看看应该怎么学吧，我在接下来的文章中，将 <code>ES 6</code> 中重要的内容挖出来，并进行简单化教程，可以观看我之后的文章进行快速性学习，然后通过不断联系，去加快自己的掌握。</p>
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2022/01/18/Blog-ES-6-1-%E4%BA%86%E8%A7%A3ES-6/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
