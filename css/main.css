@@ -2934,7 +2934,10 @@ body {
   opacity: 0.8;
 }
 .comments {
-  background: rgba(255,255,255,0.8) none repeat scroll !important;
+  background: rgba(255,255,255,0) none repeat scroll !important;
+}
+.comments .gt-container {
+  padding: 10px !important;
 }
 .site-brand-container {
   border-radius: 20px 20px 0px 0px;
