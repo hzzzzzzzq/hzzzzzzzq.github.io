@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.0.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic%7CPlayball:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"hzzzzzzzq.github.io","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.9.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+<meta name="description" content="我们从如何搭建博客开始，使用 Hexo + GithubPages 以及 NexT 主题来完成，一起来学习吧！">
+<meta property="og:type" content="article">
+<meta property="og:title" content="个人博客搭建之 Hexo + Github Pages + NexT 主题，十分钟学会">
+<meta property="og:url" content="https://hzzzzzzzq.github.io/Blog/f5b0ba0b.html">
+<meta property="og:site_name" content="hzzzzzzzq">
+<meta property="og:description" content="我们从如何搭建博客开始，使用 Hexo + GithubPages 以及 NexT 主题来完成，一起来学习吧！">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/hzzzzzzzq/Blog/main/asseats/images/hexo/image-20220117153956920.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/hzzzzzzzq/Blog/main/asseats/images/hexo/image-20220117154056202.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/hzzzzzzzq/Blog/main/asseats/images/hexo/image-20220117154209325.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/hzzzzzzzq/Blog/main/asseats/images/hexo/image-20220117154336407.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/hzzzzzzzq/Blog/main/asseats/images/hexo/image-20220117154539668.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/hzzzzzzzq/Blog/main/asseats/images/hexo/image-20220117154713730.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/hzzzzzzzq/Blog/main/asseats/images/hexo/image-20220118144154623.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/hzzzzzzzq/Blog/main/asseats/images/hexo/image-20220118144310872.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/hzzzzzzzq/Blog/main/asseats/images/hexo/image-20220118151322761.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/hzzzzzzzq/Blog/main/asseats/images/hexo/image-20220118144332639.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/hzzzzzzzq/Blog/main/asseats/images/hexo/image-20220118144408105.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/hzzzzzzzq/Blog/main/asseats/images/hexo/image-20220118151413475.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/hzzzzzzzq/Blog/main/asseats/images/hexo/image-20220118151655445.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/hzzzzzzzq/Blog/main/asseats/images/hexo/image-20220123115412196.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/hzzzzzzzq/Blog/main/asseats/images/hexo/image-20220123115524563.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/hzzzzzzzq/Blog/main/asseats/images/hexo/image-20220123115647543.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/hzzzzzzzq/Blog/main/asseats/images/hexo/image-20220123135642800.png">
+<meta property="article:published_time" content="2022-01-25T05:56:24.567Z">
+<meta property="article:modified_time" content="2022-01-25T06:13:40.261Z">
+<meta property="article:author" content="hzzzzzzzq">
+<meta property="article:tag" content="Hexo">
+<meta property="article:tag" content="GithubPages">
+<meta property="article:tag" content="NexT">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/hzzzzzzzq/Blog/main/asseats/images/hexo/image-20220117153956920.png">
+
+
+<link rel="canonical" href="https://hzzzzzzzq.github.io/Blog/f5b0ba0b.html">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://hzzzzzzzq.github.io/Blog/f5b0ba0b.html","path":"/Blog/f5b0ba0b.html","title":"个人博客搭建之 Hexo + Github Pages + NexT 主题，十分钟学会"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>个人博客搭建之 Hexo + Github Pages + NexT 主题，十分钟学会 | hzzzzzzzq</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XYLG2D6KK6"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"G-XYLG2D6KK6","only_pageview":false}</script>
+  <script src="/js/third-party/analytics/google-analytics.js"></script>
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">hzzzzzzzq</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description" style="font-family:Playball">Welcome to my blog</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+        <li class="menu-item menu-item-commonweal"><a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>公益 404</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%8B%E7%BB%8D%E4%B8%80%E4%B8%8B-hexo-%E7%9A%84%E4%B8%BB%E8%A6%81%E5%91%BD%E4%BB%A4"><span class="nav-number">1.</span> <span class="nav-text">介绍一下 hexo 的主要命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E4%BB%93%E5%BA%93"><span class="nav-number">2.</span> <span class="nav-text">创建一个仓库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E5%B9%B6%E8%BF%90%E8%A1%8C-hexo"><span class="nav-number">3.</span> <span class="nav-text">安装并运行 hexo</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%83%A8%E7%BD%B2%E5%88%B0-github-pages"><span class="nav-number">4.</span> <span class="nav-text">部署到 github pages</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%8B%E8%BD%BD%E4%BD%BF%E7%94%A8-next-%E4%B8%BB%E9%A2%98"><span class="nav-number">5.</span> <span class="nav-text">下载使用 next 主题</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="hzzzzzzzq"
+      src="/images/my_avatar.png">
+  <p class="site-author-name" itemprop="name">hzzzzzzzq</p>
+  <div class="site-description" itemprop="description">工作是修心的道场</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">30</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/hzzzzzzzq" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;hzzzzzzzq" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:hzzzzzzzq@gmail.com" title="E-Mail → mailto:hzzzzzzzq@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://hzzzzzzzq.github.io/Blog/f5b0ba0b.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/my_avatar.png">
+      <meta itemprop="name" content="hzzzzzzzq">
+      <meta itemprop="description" content="工作是修心的道场">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="hzzzzzzzq">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          个人博客搭建之 Hexo + Github Pages + NexT 主题，十分钟学会
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2022-01-25 13:56:24" itemprop="dateCreated datePublished" datetime="2022-01-25T13:56:24+08:00">2022-01-25</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Hexo/" itemprop="url" rel="index"><span itemprop="name">Hexo</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      
+      <span>2.1k</span>
+    </span>
+    <span class="post-meta-item" title="3333阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      
+      <span>5 分钟</span>
+    </span>
+</div>
+
+            <div class="post-description">我们从如何搭建博客开始，使用 Hexo + GithubPages 以及 NexT 主题来完成，一起来学习吧！</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h2 id="介绍一下-hexo-的主要命令"><a href="#介绍一下-hexo-的主要命令" class="headerlink" title="介绍一下 hexo 的主要命令"></a>介绍一下 hexo 的主要命令</h2><p>首先，我们先介绍一下 <code>hexo</code> 的一些主要命令，具体可以查看 <a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/commands">hexo 官网 - 命令</a>。</p>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>作用</th>
+<th>简写</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>hexo init &lt;file&gt;</code></td>
+<td>新建一个网站。如果没有设置 <code>file</code> ，Hexo 默认在当前的文件夹建立网站</td>
+<td></td>
+</tr>
+<tr>
+<td><code>hexo generate</code></td>
+<td>生成静态文件（<code>public</code>）</td>
+<td><code>hexo g</code></td>
+</tr>
+<tr>
+<td><code>hexo new [layout] &lt;title&gt;</code></td>
+<td>编写文章，默认在<code>source/_post</code> 文件夹下，<code>layout</code> 就是文章的布局，`post</td>
+<td>draft</td>
+</tr>
+<tr>
+<td><code>hexo server</code></td>
+<td>启动服务器。默认情况下，访问网址为： <code>http://localhost:4000/</code></td>
+<td><code>hexo s</code></td>
+</tr>
+<tr>
+<td><code>hexo deploy</code></td>
+<td>部署网站</td>
+<td><code>hexo d</code></td>
+</tr>
+<tr>
+<td><code>hexo clean</code></td>
+<td>清除缓存文件 (<code>db.json</code>) 和已生成的静态文件 (<code>public</code>)。在某些情况（尤其是更换主题后），如果发现您对站点的更改无论如何也不生效，您可能需要运行该命令</td>
+<td></td>
+</tr>
+</tbody></table>
+<h2 id="创建一个仓库"><a href="#创建一个仓库" class="headerlink" title="创建一个仓库"></a>创建一个仓库</h2><ul>
+<li>创建仓库页面</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/hzzzzzzzq/Blog/main/asseats/images/hexo/image-20220117153956920.png" alt="image-20220117153956920"></p>
+<ul>
+<li>仓库名称固定，必须是 <code>username.github.io</code> ，<code>username</code> 就是你 <code>github</code> 的名称</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/hzzzzzzzq/Blog/main/asseats/images/hexo/image-20220117154056202.png" alt="image-20220117154056202"></p>
+<ul>
+<li>进入设置页面</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/hzzzzzzzq/Blog/main/asseats/images/hexo/image-20220117154209325.png" alt="image-20220117154209325"></p>
+<ul>
+<li>然后找到下面的 <code>pages</code></li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/hzzzzzzzq/Blog/main/asseats/images/hexo/image-20220117154336407.png" alt="image-20220117154336407"></p>
+<ul>
+<li>选择主题(<code>choose a theme</code>)之后，就会自动跳转到 <code>readme</code> 的提交页面</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/hzzzzzzzq/Blog/main/asseats/images/hexo/image-20220117154539668.png" alt="image-20220117154539668"></p>
+<ul>
+<li>根据提供给的链接打开网址，我们就可以看到我们选择的主题（这一步其实不重要，因为我们会用别的主题替换）</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/hzzzzzzzq/Blog/main/asseats/images/hexo/image-20220117154713730.png" alt="image-20220117154713730"></p>
+<h2 id="安装并运行-hexo"><a href="#安装并运行-hexo" class="headerlink" title="安装并运行 hexo"></a>安装并运行 hexo</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装 hexo</span></span><br><span class="line">$ npm install -g hexo-cli</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 建立文档</span></span><br><span class="line"><span class="comment"># file - 文件路径</span></span><br><span class="line">$ <span class="built_in">cd</span> &lt;file&gt;</span><br><span class="line">$ hexo init</span><br><span class="line"></span><br><span class="line"><span class="comment"># 或者</span></span><br><span class="line"><span class="comment"># 建立的文件路径/以及名称</span></span><br><span class="line"><span class="comment"># desktop/Blog。desktop为路径 Blog 为文件名称</span></span><br><span class="line">$ hexo init &lt;file&gt;</span><br></pre></td></tr></table></figure>
+
+<p>来演示一次。</p>
+<p><img src="https://raw.githubusercontent.com/hzzzzzzzq/Blog/main/asseats/images/hexo/image-20220118144154623.png" alt="image-20220118144154623"></p>
+<ul>
+<li>安装依赖</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># file 到文件目录</span></span><br><span class="line">$ <span class="built_in">cd</span> &lt;file&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装依赖</span></span><br><span class="line">$ npm install</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/hzzzzzzzq/Blog/main/asseats/images/hexo/image-20220118144310872.png" alt="image-20220118144310872"></p>
+<ul>
+<li>可以看到现在的目录结构是这样的</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/hzzzzzzzq/Blog/main/asseats/images/hexo/image-20220118151322761.png" alt="image-20220118151322761"></p>
+<ul>
+<li>本地运行</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/hzzzzzzzq/Blog/main/asseats/images/hexo/image-20220118144332639.png" alt="image-20220118144332639"></p>
+<p>我们通过 <code>http://localhost:4000/</code> 就可以打开页面了，这就是默认页面了。</p>
+<p><img src="https://raw.githubusercontent.com/hzzzzzzzq/Blog/main/asseats/images/hexo/image-20220118144408105.png" alt="image-20220118144408105"></p>
+<h2 id="部署到-github-pages"><a href="#部署到-github-pages" class="headerlink" title="部署到 github pages"></a>部署到 github pages</h2><p>部署其实很简单，就是修改 <code>hexo</code> 文件的 <code>_config.yml</code> 底部的 <code>deploy</code> 部署代码。</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># gitname: your github name</span></span><br><span class="line"><span class="comment"># branch: 分支</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 下面注释掉的这种方式在2021年8月起，可能会报错，还是使用 ssh 的方式较好</span></span><br><span class="line"><span class="comment"># github: https://github.com/&lt;gitname&gt;/&lt;gitname&gt;.github.io.git</span></span><br><span class="line"><span class="attr">deploy:</span></span><br><span class="line">  <span class="attr">type:</span> <span class="string">git</span></span><br><span class="line">  <span class="attr">repo:</span></span><br><span class="line">    <span class="attr">github:</span> <span class="string">git@github.com:&lt;gitname&gt;/&lt;gitname&gt;.github.io.git</span></span><br><span class="line">  <span class="attr">branch:</span> <span class="string">&lt;branch&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>还需要下载一个自动部署插件</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install hexo-deployer-git</span><br></pre></td></tr></table></figure>
+
+<p>所有上面的东西，部署好之后，就可以进行部署了，我们通过一下 <code>hexo d</code> 命令对 <code>github</code> 进行部署。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>这时候我们的代码就部署到我们的 <code>github</code> 上了。</p>
+<p>我们可以直接打开链接看一下 <code>&lt;gitname&gt;.github.io</code>，就可以看到我们部署的项目了，与 <code>hexo s</code> 运行结果相同。</p>
+<h2 id="下载使用-next-主题"><a href="#下载使用-next-主题" class="headerlink" title="下载使用 next 主题"></a>下载使用 next 主题</h2><p>我们来下载 <code>next</code> 主题</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 方式一</span></span><br><span class="line">$ npm install hexo-theme-next@latest</span><br><span class="line"></span><br><span class="line"><span class="comment"># 方式二</span></span><br><span class="line">$ git <span class="built_in">clone</span> https://github.com/next-theme/hexo-theme-next themes/next</span><br><span class="line">$ git pull	<span class="comment">#更新</span></span><br></pre></td></tr></table></figure>
+
+<p>使用方法一更好一些，但是如果就更改内容来说，可能方法二比较方便。</p>
+<p>我们使用方法一来实现一次。</p>
+<p><img src="https://raw.githubusercontent.com/hzzzzzzzq/Blog/main/asseats/images/hexo/image-20220118151413475.png" alt="image-20220118151413475"></p>
+<p>我们在修改 <code>_config.yml</code> 中的 <code>theme</code> 配置</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">theme:</span> <span class="string">next</span></span><br></pre></td></tr></table></figure>
+
+<p>然后我们执行命令，并对 github 进行部署。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo g -d</span><br></pre></td></tr></table></figure>
+
+<p>我们来看看，我们的成果吧，打开你自己的网页，<code>username.github.io</code>。</p>
+<p>当然，部署命令执行之后，需要等待一会儿，不是马上就有的，如果你需要马上就有，可以执行 <code>hexo s</code>，先在本地看看是不是成功了。</p>
+<p><img src="https://raw.githubusercontent.com/hzzzzzzzq/Blog/main/asseats/images/hexo/image-20220118151655445.png" alt="image-20220118151655445"></p>
+<p>这时候，我们就已经成功了。</p>
+<p>但是有许多配置项可能都还不理解，我们进行分篇幅介绍。</p>
+<p>我们再来介绍一个命令，如果你的主题是第一种下载方式(<code>npm install hexo-theme-next@latest</code>)。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ cp node_modules/hexo-theme-next/_config.yml _config.next.yml</span><br></pre></td></tr></table></figure>
+
+<p>使用上面的命令，将主题配置文件，移到根目录下。</p>
+<p>我们再来看看现在的文件结构。</p>
+<p><img src="https://raw.githubusercontent.com/hzzzzzzzq/Blog/main/asseats/images/hexo/image-20220123115412196.png" alt="image-20220123115412196"></p>
+<p>可以发现，多出来一个 <code>_config.next.yml</code> 配置文件。</p>
+<p>我们在里面找到 <code>menu </code>，然后打开这四个路由</p>
+<p><img src="https://raw.githubusercontent.com/hzzzzzzzq/Blog/main/asseats/images/hexo/image-20220123115524563.png" alt="image-20220123115524563"></p>
+<p>在运行，看一下我们首页，就会多出一些标签路由。</p>
+<p><img src="https://raw.githubusercontent.com/hzzzzzzzq/Blog/main/asseats/images/hexo/image-20220123115647543.png" alt="image-20220123115647543"></p>
+<p>当然，除了归档，其他点击都为空路由，因为，我们还没设置这两个文件夹。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new page tag</span><br><span class="line">$ hexo new page categories</span><br></pre></td></tr></table></figure>
+
+<p>这是我们 <code>source</code> 文件夹下，多了两个文件夹。</p>
+<p><img src="https://raw.githubusercontent.com/hzzzzzzzq/Blog/main/asseats/images/hexo/image-20220123135642800.png" alt="image-20220123135642800"></p>
+<p>这时候，在打开网站时，就可以打开相关页面了，其他路由同理。</p>
+
+    </div>
+
+    
+    
+    
+      
+  <div class="popular-posts-header">相关文章推荐</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/Blog/6cc26e1f.html" rel="bookmark">个人博客搭建之 NexT 主题功能页面相关设置</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/Blog/b66e55e6.html" rel="bookmark">个人博客搭建之 Hexo 配置 - 常用</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/Blog/dd03fa62.html" rel="bookmark">个人博客搭建之 Hexo - NexT 主题下配置 Gitalk/Disqus 评论系统</a></div>
+    </li>
+  </ul>
+
+    <div>
+      <div style="text-align:center;color:#bfbfbf;font-size:16px;">
+        <span>--------------------   本文结束   </span>
+        <i class="fa fa-heart"></i>
+        <span>   感谢阅读   --------------------</span>
+      </div>
+
+    </div>
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>Buy me a coffee</div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/my_avatar.png" alt="hzzzzzzzq 微信">
+        <span>微信</span>
+      </div>
+      <div>
+        <img src="/images/my_avatar.png" alt="hzzzzzzzq 支付宝">
+        <span>支付宝</span>
+      </div>
+
+  </div>
+</div>
+
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>hzzzzzzzq
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://hzzzzzzzq.github.io/Blog/f5b0ba0b.html" title="个人博客搭建之 Hexo + Github Pages + NexT 主题，十分钟学会">https://hzzzzzzzq.github.io/Blog/f5b0ba0b.html</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh-CN" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Hexo/" rel="tag"><i class="fa fa-tags"></i> Hexo</a>
+              <a href="/tags/GithubPages/" rel="tag"><i class="fa fa-tags"></i> GithubPages</a>
+              <a href="/tags/NexT/" rel="tag"><i class="fa fa-tags"></i> NexT</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/Blog/5944310.html" rel="prev" title="CSS 系列之float 布局">
+                  <i class="fa fa-chevron-left"></i> CSS 系列之float 布局
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/Blog/b66e55e6.html" rel="next" title="个人博客搭建之 Hexo 配置 - 常用">
+                  个人博客搭建之 Hexo 配置 - 常用 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+    <div class="comments gitalk-container"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright" style="color: #fff">
+  &copy; 
+  <span itemprop="copyrightYear" >2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder" style="color: #fff">hzzzzzzzq</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item" style="color: #fff">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">站点字数:101k</span>
+  </span>
+  <span class="post-meta-item" style="color: #fff">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">阅读时间:4:13</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon"  style="color: #fff">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv" style="color: #fff"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon" style="color: #fff">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv" style="color: #fff"></span>
+      </span>
+    </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.css" integrity="sha256-AJnUHL7dBv6PGaeyPQJcgQPDjt/Hn/PvYZde1iqfp8U=" crossorigin="anonymous">
+
+<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"hzzzzzzzq","repo":"hzzzzzzzq.github.io","client_id":"db7c4e0e53abcae5c547","client_secret":"d611e08d46b49ad9333ba38514f964cc7644ef8d","admin_user":"hzzzzzzzq","distraction_free_mode":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":"zh-CN","js":{"url":"https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.js","integrity":"sha256-Pmj85ojLaPOWwRtlMJwmezB/Qg8BzvJp5eTzvXaYAfA="},"path_md5":"432040fb16b266c23d06ace934b3f593"}</script>
+<script src="/js/third-party/comments/gitalk.js"></script>
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"left","width":150,"height":300},"mobile":{"show":true},"log":false});</script></body>
+</html>
