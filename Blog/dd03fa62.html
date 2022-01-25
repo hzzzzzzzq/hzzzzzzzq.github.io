@@ -19,7 +19,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
 
-<script class="next-config" data-name="main" type="application/json">{"hostname":"hzzzzzzzq.github.io","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.9.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+<script class="next-config" data-name="main" type="application/json">{"hostname":"hzzzzzzzq.github.io","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.9.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 <meta name="description" content="其实我们的博客已经很完善了，现在，我们还需要给我们的博客添加一个评论功能，来看看怎么实现吧。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="个人博客搭建之 Hexo - NexT 主题下配置 Gitalk&#x2F;Disqus 评论系统">
@@ -329,15 +329,15 @@
 <p><code>Authorization callback URL</code>：还是填写你博客的域名</p>
 </li>
 </ul>
-<p><img src="https://raw.githubusercontent.com/hzzzzzzzq/Blog/main/asseats/images/hexo/image-20220119171611982.png" alt="image-20220119171611982"></p>
+<p><img data-src="https://raw.githubusercontent.com/hzzzzzzzq/Blog/main/asseats/images/hexo/image-20220119171611982.png" alt="image-20220119171611982"></p>
 <p>点击 Register application 之后，会进入这个页面，在这里 <code>Client ID</code> 和 <code>Client secrets</code> 两个值，是需要存下来的，一会儿要用。</p>
-<p><img src="https://raw.githubusercontent.com/hzzzzzzzq/Blog/main/asseats/images/hexo/image-20220119172332985.png" alt="image-20220119172332985"></p>
+<p><img data-src="https://raw.githubusercontent.com/hzzzzzzzq/Blog/main/asseats/images/hexo/image-20220119172332985.png" alt="image-20220119172332985"></p>
 <p>Client secrets 是需要自己创建一个的不会给你自动创建的，点击之后，就会创建一个。</p>
-<p><img src="https://raw.githubusercontent.com/hzzzzzzzq/Blog/main/asseats/images/hexo/image-20220119172501736.png" alt="image-20220119172501736"></p>
+<p><img data-src="https://raw.githubusercontent.com/hzzzzzzzq/Blog/main/asseats/images/hexo/image-20220119172501736.png" alt="image-20220119172501736"></p>
 <ul>
 <li>创建一个仓库 - <a target="_blank" rel="noopener" href="https://github.com/new">地址</a></li>
 </ul>
-<p><img src="https://raw.githubusercontent.com/hzzzzzzzq/Blog/main/asseats/images/hexo/image-20220120083817190.png" alt="image-20220120083817190"></p>
+<p><img data-src="https://raw.githubusercontent.com/hzzzzzzzq/Blog/main/asseats/images/hexo/image-20220120083817190.png" alt="image-20220120083817190"></p>
 <p><code>Repository name</code> 仓库名称</p>
 <p>添加一个 <code>README file</code>，点击创建就可以了。</p>
 <p>如果你看过我的第一篇文章<a href="">《hexo-githubPages》</a>，你就可以直接用你 <code>githubpages</code> 的仓库(<code>yourname.github.io</code>)，不需要新建一个仓库了。</p>
@@ -352,12 +352,12 @@
 <p><code>language</code>：修改语言。</p>
 </li>
 </ul>
-<p><img src="https://raw.githubusercontent.com/hzzzzzzzq/Blog/main/asseats/images/hexo/image-20220120084754458.png"></p>
+<p><img data-src="https://raw.githubusercontent.com/hzzzzzzzq/Blog/main/asseats/images/hexo/image-20220120084754458.png"></p>
 <p>配置完成之后，执行</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ hexo clean &amp;&amp; hexo g -d <span class="comment"># 清理缓存并发布</span></span><br><span class="line">$ hexo s <span class="comment"># 查看本地情况</span></span><br></pre></td></tr></table></figure>
 
 <p>你在本地或者你部署的网站，找到一篇文章，拉到底部，会看到这样的情况。</p>
-<p><img src="https://raw.githubusercontent.com/hzzzzzzzq/Blog/main/asseats/images/hexo/image-20220123104356814.png" alt="image-20220123104356814"></p>
+<p><img data-src="https://raw.githubusercontent.com/hzzzzzzzq/Blog/main/asseats/images/hexo/image-20220123104356814.png" alt="image-20220123104356814"></p>
 <p>点击登陆 <code>github</code> 即可。</p>
 <ul>
 <li>可能遇到错误</li>
@@ -369,43 +369,43 @@
 <ul>
 <li>最后成功结果</li>
 </ul>
-<p><img src="https://raw.githubusercontent.com/hzzzzzzzq/Blog/main/asseats/images/hexo/image-20220125135325746.png" alt="image-20220125135325746"></p>
+<p><img data-src="https://raw.githubusercontent.com/hzzzzzzzq/Blog/main/asseats/images/hexo/image-20220125135325746.png" alt="image-20220125135325746"></p>
 <h2 id="Disqus-设置-需要科学上网才能显示"><a href="#Disqus-设置-需要科学上网才能显示" class="headerlink" title="Disqus 设置 - 需要科学上网才能显示"></a>Disqus 设置 - 需要科学上网才能显示</h2><ul>
 <li><a target="_blank" rel="noopener" href="https://disqus.com/">Disqus 评论系统官网</a></li>
 </ul>
 <p>如果您的评论会有许多人，可以选择一个订阅购买，但是如果人数较少，可以选择底下的 <code>Basic</code>.</p>
-<p><img src="https://raw.githubusercontent.com/hzzzzzzzq/Blog/main/asseats/images/hexo/image-20220119141616333.png" alt="image-20220119141616333"></p>
-<p><img src="https://raw.githubusercontent.com/hzzzzzzzq/Blog/main/asseats/images/hexo/image-20220119141706654.png" alt="image-20220119141706654"></p>
+<p><img data-src="https://raw.githubusercontent.com/hzzzzzzzq/Blog/main/asseats/images/hexo/image-20220119141616333.png" alt="image-20220119141616333"></p>
+<p><img data-src="https://raw.githubusercontent.com/hzzzzzzzq/Blog/main/asseats/images/hexo/image-20220119141706654.png" alt="image-20220119141706654"></p>
 <ul>
 <li>下一步，会让我们选择在哪个平台，而我们会发现没有 hexo，所以我们选择 <code>I don&#39;t see...</code></li>
 </ul>
-<p><img src="https://raw.githubusercontent.com/hzzzzzzzq/Blog/main/asseats/images/hexo/image-20220119142042285.png" alt="image-20220119142042285"></p>
+<p><img data-src="https://raw.githubusercontent.com/hzzzzzzzq/Blog/main/asseats/images/hexo/image-20220119142042285.png" alt="image-20220119142042285"></p>
 <ul>
 <li>选择之后，就会出现 2.2 步骤，教您怎么安装程式码</li>
 </ul>
-<p><img src="https://raw.githubusercontent.com/hzzzzzzzq/Blog/main/asseats/images/hexo/image-20220119142214404.png" alt="image-20220119142214404"></p>
+<p><img data-src="https://raw.githubusercontent.com/hzzzzzzzq/Blog/main/asseats/images/hexo/image-20220119142214404.png" alt="image-20220119142214404"></p>
 <ul>
 <li>因为，我们需要的是 short-name，我们跳过这一步，直接来到第三步，是设置一些您要应用的网站留言板的相关设定，填写您想填的资料或是都不填也可以，但要记得 <code>Website Name</code> 不要改动，或是再另外改成你想要的即可</li>
 </ul>
-<p><img src="https://raw.githubusercontent.com/hzzzzzzzq/Blog/main/asseats/images/hexo/image-20220119142457348.png" alt="image-20220119142457348"></p>
+<p><img data-src="https://raw.githubusercontent.com/hzzzzzzzq/Blog/main/asseats/images/hexo/image-20220119142457348.png" alt="image-20220119142457348"></p>
 <ul>
 <li>然后我们点击 next 就来到最后一步了，选择评论的审核机制，具体的可以根据翻译选择。我们可以选择 <code>Balanced</code>。</li>
 </ul>
-<p><img src="https://raw.githubusercontent.com/hzzzzzzzq/Blog/main/asseats/images/hexo/image-20220119142532859.png" alt="image-20220119142532859"></p>
+<p><img data-src="https://raw.githubusercontent.com/hzzzzzzzq/Blog/main/asseats/images/hexo/image-20220119142532859.png" alt="image-20220119142532859"></p>
 <ul>
 <li>到此，我们已经完成 <a target="_blank" rel="noopener" href="https://disqus.com/">Disqus</a> <code>site</code> 的配置了，接下来，就是进入我们的 <code>next</code> 主题中的配置了。</li>
 </ul>
-<p><img src="https://raw.githubusercontent.com/hzzzzzzzq/Blog/main/asseats/images/hexo/image-20220119142808820.png"></p>
+<p><img data-src="https://raw.githubusercontent.com/hzzzzzzzq/Blog/main/asseats/images/hexo/image-20220119142808820.png"></p>
 <h2 id="hexo-next-主题设置"><a href="#hexo-next-主题设置" class="headerlink" title="hexo - next 主题设置"></a>hexo - next 主题设置</h2><p>在 next 主题中，以及为我们提供了 <a target="_blank" rel="noopener" href="https://theme-next.iissnan.com/third-party-services.html#disqus">next 主题下 Disqus 相关配置</a>。</p>
 <p>我们只需要编辑<strong>主题配置文件</strong>下的内容就可以了 ，在配置文件中，搜索 Disques，找到下面的代码。</p>
-<p><img src="https://raw.githubusercontent.com/hzzzzzzzq/Blog/main/asseats/images/hexo/image-20220119143343104.png" alt="image-20220119143343104"></p>
+<p><img data-src="https://raw.githubusercontent.com/hzzzzzzzq/Blog/main/asseats/images/hexo/image-20220119143343104.png" alt="image-20220119143343104"></p>
 <ul>
 <li><p>将配置的 shortname 内容输入，并将 enable 修改为 true 即可</p>
 </li>
 <li><p>然后我们执行 <code>hexo g -d</code> 就可以查看效果了，选择一篇文章，看最底部，就出现评论功能了。</p>
 </li>
 </ul>
-<p><img src="https://raw.githubusercontent.com/hzzzzzzzq/Blog/main/asseats/images/hexo/image-20220119144044662.png" alt="image-20220119144044662"></p>
+<p><img data-src="https://raw.githubusercontent.com/hzzzzzzzq/Blog/main/asseats/images/hexo/image-20220119144044662.png" alt="image-20220119144044662"></p>
 
     </div>
 
@@ -550,6 +550,7 @@
 
   
   <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lozad@1.16.0/dist/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
 <script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
 
   

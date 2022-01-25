@@ -19,7 +19,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
 
-<script class="next-config" data-name="main" type="application/json">{"hostname":"hzzzzzzzq.github.io","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.9.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+<script class="next-config" data-name="main" type="application/json">{"hostname":"hzzzzzzzq.github.io","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.9.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 <meta name="description" content="使用 husky + commit Lint，规范我们的 commit log，快来了解吧！">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Git 系列之commit 格式化 husky（V7.0.4）让我们的 commit 更规范">
@@ -300,8 +300,8 @@
     
     <div class="post-body" itemprop="articleBody">
         <p>这里我们来说一下为什么我们做一个 <code>git commit</code> 的格式化。</p>
-<p>我们来看看 <code>commit log</code> 做格式化之前的样子。<br><img src="https://user-images.githubusercontent.com/66205484/144975728-345548af-e8b2-4b99-aa54-27f41958ed5e.png" alt="1C3B682E-04B3-49C6-8136-0F8288F552D1"></p>
-<p>我们再来看看 <code>commit log</code> 格式化之后的样子。<br><img src="https://user-images.githubusercontent.com/66205484/144977548-af392772-7f52-4ec4-8f45-1f9c13300417.png" alt="image"></p>
+<p>我们来看看 <code>commit log</code> 做格式化之前的样子。<br><img data-src="https://user-images.githubusercontent.com/66205484/144975728-345548af-e8b2-4b99-aa54-27f41958ed5e.png" alt="1C3B682E-04B3-49C6-8136-0F8288F552D1"></p>
+<p>我们再来看看 <code>commit log</code> 格式化之后的样子。<br><img data-src="https://user-images.githubusercontent.com/66205484/144977548-af392772-7f52-4ec4-8f45-1f9c13300417.png" alt="image"></p>
 <p>对比格式化前和格式化后的感觉， 是不是很清晰，也可以让别人看得懂你在做什么，在多人协作开发时，是特别重要的。</p>
 <p>在开始文章之前，我来说一下我使用的 <code>node</code> 和 <code>npm</code> 版本。</p>
 <blockquote>
@@ -328,7 +328,7 @@
 
 <p>或者可以直接跳过启动，手动去修改 <code>package.json</code> 文件，在 scripts 中添加 <code>&quot;prepare&quot;: &quot;husky install&quot;</code> 语句，然后执行 <code>husky install</code> 命令。</p>
 <p>执行之后会增加一个 <code>.husky</code> 的文件夹。</p>
-<p><img src="https://user-images.githubusercontent.com/66205484/144980206-a484f643-9116-4c46-92c7-d11ce7d07cd1.png" alt="image"></p>
+<p><img data-src="https://user-images.githubusercontent.com/66205484/144980206-a484f643-9116-4c46-92c7-d11ce7d07cd1.png" alt="image"></p>
 <ul>
 <li><strong>安装其他的一些检查规范</strong></li>
 </ul>
@@ -356,7 +356,7 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 添加 commit-msg</span></span><br><span class="line">yarn husky add .husky/commit-msg <span class="string">&#x27;yarn commitlint --edit &quot;$1&quot;&#x27;</span></span><br><span class="line"><span class="comment"># 添加 pre-commit</span></span><br><span class="line">yarn husky add .husky/pre-commit <span class="string">&#x27;yarn lint-staged --allow-empty &quot;$1&quot;&#x27;</span></span><br></pre></td></tr></table></figure>
 
 <p>这之后我们可以来看看 <code>.husky</code> 文件现在的样子</p>
-<p><img src="https://user-images.githubusercontent.com/66205484/144981602-8c53ab14-4c9c-4340-9a7f-b4dc4f119c2f.png" alt="image"></p>
+<p><img data-src="https://user-images.githubusercontent.com/66205484/144981602-8c53ab14-4c9c-4340-9a7f-b4dc4f119c2f.png" alt="image"></p>
 <ul>
 <li>最好就是 测试我们的 <code>git commit</code> 了</li>
 </ul>
@@ -365,7 +365,7 @@
 <ul>
 <li>打印内容</li>
 </ul>
-<p><img src="https://user-images.githubusercontent.com/66205484/144982485-d2d4ac26-70b6-412e-a58b-5b5f223dcf7a.png" alt="image"></p>
+<p><img data-src="https://user-images.githubusercontent.com/66205484/144982485-d2d4ac26-70b6-412e-a58b-5b5f223dcf7a.png" alt="image"></p>
 <p>到这里我们就完成啦，当然，如果你的 <code>commit log</code> 格式，不符合自己添加的 <code>rules</code> 那么就会在 <code>commit</code> 时提交失败，这时候就需要你修改 <code>commit log</code> 的格式了。</p>
 
     </div>
@@ -508,6 +508,7 @@
 
   
   <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lozad@1.16.0/dist/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
 <script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
 
   

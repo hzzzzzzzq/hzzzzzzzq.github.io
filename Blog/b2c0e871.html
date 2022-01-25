@@ -19,7 +19,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
 
-<script class="next-config" data-name="main" type="application/json">{"hostname":"hzzzzzzzq.github.io","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.9.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+<script class="next-config" data-name="main" type="application/json">{"hostname":"hzzzzzzzq.github.io","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.9.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 <meta name="description" content="Git 系列之Git 实践操作，让我们在真实的环境下去了解 Git 操作吧！">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Git 系列之Git 实践">
@@ -316,16 +316,16 @@
 <h2 id="拷贝"><a href="#拷贝" class="headerlink" title="拷贝"></a>拷贝</h2><ul>
 <li>先到自己想要放项目的目录之下</li>
 </ul>
-<p><img src="https://user-images.githubusercontent.com/66205484/145941855-ee376157-ea50-4815-b072-f6e17388bf3c.png" alt="image"></p>
+<p><img data-src="https://user-images.githubusercontent.com/66205484/145941855-ee376157-ea50-4815-b072-f6e17388bf3c.png" alt="image"></p>
 <ul>
 <li>然后拷贝项目，后面的 <code>url</code> 放置自己的项目地址<br>当然，可能会进行密码输入之类的问题 比如 <strong>GitHub 不再支持密码验证解决方案：SSH 免密与 Token 登录配置</strong>。<br>这时候的链接，可能是需要 <code>SSH</code> 命令的 <code>git@github.com:hzzzzzzzq/git-application-docs.git</code>。</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/hzzzzzzzq/git-application-docs.git</span><br><span class="line"><span class="comment"># 或者</span></span><br><span class="line">git <span class="built_in">clone</span> git@github.com:hzzzzzzzq/git-application-docs.git</span><br><span class="line"></span><br><span class="line"><span class="comment"># 拷贝之后我们 cd 到目录文件</span></span><br><span class="line"><span class="built_in">cd</span> git-application-docs</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://user-images.githubusercontent.com/66205484/145945033-c6a0cd8d-fd48-48df-8c70-493dafe38e90.png" alt="image"></p>
+<p><img data-src="https://user-images.githubusercontent.com/66205484/145945033-c6a0cd8d-fd48-48df-8c70-493dafe38e90.png" alt="image"></p>
 <p>现在，就是我们 <code>clone</code> 下来的项目。</p>
 <h2 id="提交和推送"><a href="#提交和推送" class="headerlink" title="提交和推送"></a>提交和推送</h2><ul>
-<li><p>先添加想要加入的文件夹<br>我们这里加入 <code>git</code> 文件夹，以及 <code>branchTry.md</code> 用于分支合并，和 <code>gitTry.md</code> 用于 <code>git</code> 提交等。<br><img src="https://user-images.githubusercontent.com/66205484/145945306-950914ca-082a-4277-aa98-59ed75dfd584.png" alt="image"></p>
+<li><p>先添加想要加入的文件夹<br>我们这里加入 <code>git</code> 文件夹，以及 <code>branchTry.md</code> 用于分支合并，和 <code>gitTry.md</code> 用于 <code>git</code> 提交等。<br><img data-src="https://user-images.githubusercontent.com/66205484/145945306-950914ca-082a-4277-aa98-59ed75dfd584.png" alt="image"></p>
 </li>
 <li><p>将添加的文件加入<strong>暂存区</strong></p>
 </li>
@@ -337,7 +337,7 @@
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git commit -m <span class="string">&quot;feat: 添加文件&quot;</span></span><br></pre></td></tr></table></figure>
 
-<p><img src="https://user-images.githubusercontent.com/66205484/145946832-6365b89f-1bbc-49db-bdee-b629e38da6a5.png" alt="image"></p>
+<p><img data-src="https://user-images.githubusercontent.com/66205484/145946832-6365b89f-1bbc-49db-bdee-b629e38da6a5.png" alt="image"></p>
 <p>其中包含了修改的文件内容。</p>
 <p><strong>补充：提交信息的规范</strong></p>
 <blockquote>
@@ -348,7 +348,7 @@
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://user-images.githubusercontent.com/66205484/145946928-94db41fa-ce35-4c8d-b89f-a90e624bfb7e.png" alt="image"></p>
+<p><img data-src="https://user-images.githubusercontent.com/66205484/145946928-94db41fa-ce35-4c8d-b89f-a90e624bfb7e.png" alt="image"></p>
 <p><code>git push</code> 提交远端仓库的结果。</p>
 <h2 id="分支管理"><a href="#分支管理" class="headerlink" title="分支管理"></a>分支管理</h2><ul>
 <li>创建一个新分支，并切换入该分支<br><code>feat-branch</code> 是分支名，这里基本是按照功能来命名。</li>
@@ -370,28 +370,28 @@
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push git@github.com:hzzzzzzzq/git-application-docs.git feat-branch</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://user-images.githubusercontent.com/66205484/145948538-7a1b1cfa-68a2-4331-93c1-b7ccd4233e4b.png" alt="image"></p>
+<p><img data-src="https://user-images.githubusercontent.com/66205484/145948538-7a1b1cfa-68a2-4331-93c1-b7ccd4233e4b.png" alt="image"></p>
 <p>这时候，在远端仓库中，就可以看到该分支了。</p>
-<p><img src="https://user-images.githubusercontent.com/66205484/145948592-28bfcf8d-bbc9-4bd4-abea-3677f5166223.png" alt="image"></p>
+<p><img data-src="https://user-images.githubusercontent.com/66205484/145948592-28bfcf8d-bbc9-4bd4-abea-3677f5166223.png" alt="image"></p>
 <h2 id="拉取"><a href="#拉取" class="headerlink" title="拉取"></a>拉取</h2><p>一个项目经常是多个人一起进行开发的，当别人提交代码时，我们就需要拉取他人的代码了。这时候 <code>git pull</code> 的作用就来了。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git pull</span><br></pre></td></tr></table></figure>
 
 <p>为了演示 <code>git pull</code>，我在这边新建一个 <code>git</code> 本地仓库，用来演示共同开发时的拉取以及冲突。</p>
 <p><code>clone</code> 一个新项目，我们然后对文件进行部分修改，然后进行提交。</p>
-<p><img src="https://user-images.githubusercontent.com/66205484/145949740-f16e3a5f-37a0-4a9e-84d0-d949b81250a4.png" alt="image"></p>
-<p><img src="https://user-images.githubusercontent.com/66205484/145949825-3bdd4f02-b9d4-4fff-b7e1-5acef06fcb0b.png" alt="image"></p>
+<p><img data-src="https://user-images.githubusercontent.com/66205484/145949740-f16e3a5f-37a0-4a9e-84d0-d949b81250a4.png" alt="image"></p>
+<p><img data-src="https://user-images.githubusercontent.com/66205484/145949825-3bdd4f02-b9d4-4fff-b7e1-5acef06fcb0b.png" alt="image"></p>
 <p>接下来，我们重新切回到我们之前的文件，然后进行 <code>git pull</code>。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 切换原项目</span></span><br><span class="line"><span class="built_in">cd</span> ../git-application-docs</span><br><span class="line"></span><br><span class="line"><span class="comment"># 切到 main 分支</span></span><br><span class="line">git checkout main</span><br><span class="line"></span><br><span class="line"><span class="comment"># 拉取远端代码</span></span><br><span class="line">git pull</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://user-images.githubusercontent.com/66205484/145950387-c9287701-4fa0-45fe-b4fe-40fbd0536277.png" alt="image"></p>
+<p><img data-src="https://user-images.githubusercontent.com/66205484/145950387-c9287701-4fa0-45fe-b4fe-40fbd0536277.png" alt="image"></p>
 <h2 id="合并与冲突"><a href="#合并与冲突" class="headerlink" title="合并与冲突"></a>合并与冲突</h2><p>在 <code>main</code> 分支下，修改标题内容。</p>
-<p><img src="https://user-images.githubusercontent.com/66205484/145951381-1dcf6294-2fed-4604-b1b7-15ff41c8e38d.png" alt="image"></p>
+<p><img data-src="https://user-images.githubusercontent.com/66205484/145951381-1dcf6294-2fed-4604-b1b7-15ff41c8e38d.png" alt="image"></p>
 <p>然后提交。</p>
-<p><img src="https://user-images.githubusercontent.com/66205484/145951973-5b9d95a9-e398-4cf5-a918-cb87aacf7106.png" alt="image"></p>
+<p><img data-src="https://user-images.githubusercontent.com/66205484/145951973-5b9d95a9-e398-4cf5-a918-cb87aacf7106.png" alt="image"></p>
 <p>切换到 <code>feat-branch</code>，并修改同文件的标题，并提交。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 切分支</span></span><br><span class="line">git checkout feat-branch</span><br><span class="line"><span class="comment"># 添加到暂存区</span></span><br><span class="line">git add .</span><br><span class="line"><span class="comment"># 提交</span></span><br><span class="line">git commit -m <span class="string">&quot;feat: change branch title&quot;</span></span><br><span class="line"><span class="comment"># 推送到远端</span></span><br><span class="line">git push</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://user-images.githubusercontent.com/66205484/145952854-b3002d2b-5002-403e-9911-351e77114f98.png" alt="image"></p>
+<p><img data-src="https://user-images.githubusercontent.com/66205484/145952854-b3002d2b-5002-403e-9911-351e77114f98.png" alt="image"></p>
 <ul>
 <li>合并</li>
 </ul>
@@ -399,27 +399,27 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 切分支</span></span><br><span class="line">git checkout main</span><br><span class="line"><span class="comment"># 合并</span></span><br><span class="line">git merge feat-branch</span><br><span class="line"><span class="comment"># 没有冲突的情况，直接推送即可</span></span><br><span class="line">git push</span><br></pre></td></tr></table></figure>
 
 <p>如果合并没有问题，就可以直接进行 <code>push</code> 操作。<br>但是，由于我们在两个分支，同时对同一个文件的同一个地方进行了修改，于是，就产生了以下问题，<code>merge</code> 失败，有冲突。</p>
-<p><img src="https://user-images.githubusercontent.com/66205484/145953252-68c50a45-491c-45e4-8fe0-9547b848bf2e.png" alt="image"></p>
+<p><img data-src="https://user-images.githubusercontent.com/66205484/145953252-68c50a45-491c-45e4-8fe0-9547b848bf2e.png" alt="image"></p>
 <ul>
 <li>冲突</li>
 </ul>
 <p>我们需要打开文件夹，我们发现一些奇奇怪怪的符号，这些就是冲突的标识，我们需要对冲突进行处理。<br>将文件进行修改，调整到你希望的样子。并对全局进行检查是否，还有其他冲突文件。</p>
 <p>我们看到有 <code>&lt;&lt;&lt;&lt;&lt;&lt;</code> 以及 <code>======</code> 因为在 <code>.md</code> 文件中，我打开了源形式，否则可能看不到 <code>=====</code> 或者 <code>&lt;</code> 被转化。</p>
-<p><img src="https://user-images.githubusercontent.com/66205484/145954659-f1b01667-b998-4dfb-876a-bc0df63ce0f7.png" alt="image"></p>
-<p>现在我演示一下，我想保留 <code>feat-branch</code> 的内容，则删除 <code>main</code> 分支的内容。<br>将 <code>main</code> 分支内容删除之后的样子。<br><img src="https://user-images.githubusercontent.com/66205484/145954865-71a2a7a6-a0d4-4ddf-b1aa-1bc3fa2e5225.png" alt="image"></p>
+<p><img data-src="https://user-images.githubusercontent.com/66205484/145954659-f1b01667-b998-4dfb-876a-bc0df63ce0f7.png" alt="image"></p>
+<p>现在我演示一下，我想保留 <code>feat-branch</code> 的内容，则删除 <code>main</code> 分支的内容。<br>将 <code>main</code> 分支内容删除之后的样子。<br><img data-src="https://user-images.githubusercontent.com/66205484/145954865-71a2a7a6-a0d4-4ddf-b1aa-1bc3fa2e5225.png" alt="image"></p>
 <ul>
 <li>提交推送</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 添加冲突文件到暂存区</span></span><br><span class="line">git add .</span><br><span class="line"><span class="comment"># 提交到本地</span></span><br><span class="line">git commit -m <span class="string">&quot;merge: 合并冲突&quot;</span></span><br><span class="line"><span class="comment"># 推送到远端</span></span><br><span class="line">git push</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://user-images.githubusercontent.com/66205484/145955245-05b5c18b-88b0-41c1-a84a-e44d255ea3c0.png" alt="image"></p>
+<p><img data-src="https://user-images.githubusercontent.com/66205484/145955245-05b5c18b-88b0-41c1-a84a-e44d255ea3c0.png" alt="image"></p>
 <p>这时，我们在远端仓库 <code>main</code> 分支下，看到的就是我们 <code>feat-branch</code> 分支中的内容了。</p>
 <h2 id="提交记录"><a href="#提交记录" class="headerlink" title="提交记录"></a>提交记录</h2><ul>
 <li>git log 查看提交记录</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">log</span></span><br></pre></td></tr></table></figure>
 
-<p><img src="https://user-images.githubusercontent.com/66205484/145955543-29fc882d-7a25-418c-9e9e-35bd77ccd8c4.png" alt="image"></p>
+<p><img data-src="https://user-images.githubusercontent.com/66205484/145955543-29fc882d-7a25-418c-9e9e-35bd77ccd8c4.png" alt="image"></p>
 <ul>
 <li>只看某个人的提交记录<br>这里结果是一样的，因为都是我自己完成的。</li>
 </ul>
@@ -565,6 +565,7 @@
 
   
   <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lozad@1.16.0/dist/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
 <script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
 
   
