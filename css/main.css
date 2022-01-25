@@ -2933,6 +2933,9 @@ body {
 .header-inner {
   opacity: 0.8;
 }
+.popup {
+  opacity: 0.9;
+}
 .comments {
   background: rgba(255,255,255,0) none repeat scroll !important;
 }
