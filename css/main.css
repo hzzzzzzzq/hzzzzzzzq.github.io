@@ -2918,11 +2918,11 @@ mark.search-keyword {
   }
 }
 body {
-  background-image: linear-gradient(#abdcff, #0396ff);
+  background-image: url("/images/background.png");
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-position: 50% 50%;
-  background-size: 100vw;
+  background-size: inner;
 }
 .main-inner {
   background: rgba(255,255,255,0.8) none repeat scroll !important;
@@ -2946,6 +2946,8 @@ body {
   border-radius: 20px 20px 0px 0px;
 }
 .back-to-top {
+  position: fixed;
+  left: 0px;
   opacity: 1;
   width: 70px;
   height: 900px;
@@ -2953,11 +2955,12 @@ body {
   bottom: unset;
   transition: all 0.5s ease-in-out;
   background: url("/images/scroll.png");
+  background-size: 70px 900px;
 }
 .back-to-top > i {
   display: none;
 }
 .back-to-top.back-to-top-on {
   bottom: unset;
-  top: calc(100vh - 900px - 400px);
+  top: calc(100vh - 900px - 300px);
 }
