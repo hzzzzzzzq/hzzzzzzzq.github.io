@@ -2964,3 +2964,7 @@ body {
   bottom: unset;
   top: calc(100vh - 900px - 300px);
 }
+.back-to-top:active,
+.back-to-top:hover {
+  -webkit-tap-highlight-color: transparent;
+}
