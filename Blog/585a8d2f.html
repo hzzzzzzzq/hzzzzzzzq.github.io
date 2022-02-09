@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.0.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/my_apple_icon_playball.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/my_favicon32_playball.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/my_favicon16_playball.png">
+  <link rel="mask-icon" href="/images/my_logo_playball.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic%7CPlayball:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"hzzzzzzzq.github.io","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.9.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+<meta name="description" content="bind 函数与 call,apply 的区别是什么呢？  bind 函数并不是直接调用的，且返回函数可以参数 参数一 与 call、apply 同样，指定的对象（该函数的执行上下文 其他参数与 call 相同，都作为参数传入，但是 apply 只传入一个数组参数  具体对照，可以看我上面的一篇文章，JavaScript 深入之 call 和 apply 函数。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="深入理解JavaScript系列（9）：bind">
+<meta property="og:url" content="https://hzzzzzzzq.github.io/Blog/585a8d2f.html">
+<meta property="og:site_name" content="hzzzzzzzq">
+<meta property="og:description" content="bind 函数与 call,apply 的区别是什么呢？  bind 函数并不是直接调用的，且返回函数可以参数 参数一 与 call、apply 同样，指定的对象（该函数的执行上下文 其他参数与 call 相同，都作为参数传入，但是 apply 只传入一个数组参数  具体对照，可以看我上面的一篇文章，JavaScript 深入之 call 和 apply 函数。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-02-09T09:04:49.790Z">
+<meta property="article:modified_time" content="2022-02-09T09:14:51.835Z">
+<meta property="article:author" content="hzzzzzzzq">
+<meta property="article:tag" content="call">
+<meta property="article:tag" content="apply">
+<meta property="article:tag" content="bind">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://hzzzzzzzq.github.io/Blog/585a8d2f.html">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://hzzzzzzzq.github.io/Blog/585a8d2f.html","path":"/Blog/585a8d2f.html","title":"深入理解JavaScript系列（9）：bind"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>深入理解JavaScript系列（9）：bind | hzzzzzzzq</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XYLG2D6KK6"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"G-XYLG2D6KK6","only_pageview":false}</script>
+  <script src="/js/third-party/analytics/google-analytics.js"></script>
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">hzzzzzzzq</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description" style="font-family:Playball">Welcome to my blog</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+        <li class="menu-item menu-item-commonweal"><a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>公益 404</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E7%89%88-%E8%BF%94%E5%9B%9E%E5%87%BD%E6%95%B0"><span class="nav-number">1.</span> <span class="nav-text">第一版 - 返回函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%BA%8C%E7%89%88-%E4%BC%A0%E5%85%A5%E5%8F%82%E6%95%B0"><span class="nav-number">2.</span> <span class="nav-text">第二版 - 传入参数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%B8%89%E7%89%88-%E4%BD%9C%E4%B8%BA%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%E4%BD%BF%E7%94%A8%E7%9A%84%E7%BB%91%E5%AE%9A%E5%87%BD%E6%95%B0"><span class="nav-number">3.</span> <span class="nav-text">第三版 - 作为构造函数使用的绑定函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E5%9B%9B%E7%89%88-%E6%B1%87%E6%80%BB"><span class="nav-number">4.</span> <span class="nav-text">第四版 - 汇总</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%87%E7%AB%A0%E5%8F%82%E8%80%83"><span class="nav-number">5.</span> <span class="nav-text">文章参考</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="hzzzzzzzq"
+      src="/images/my_avatar.png">
+  <p class="site-author-name" itemprop="name">hzzzzzzzq</p>
+  <div class="site-description" itemprop="description">工作是修心的道场</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">40</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">21</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/hzzzzzzzq" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;hzzzzzzzq" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:hzzzzzzzq@gmail.com" title="E-Mail → mailto:hzzzzzzzq@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://hzzzzzzzq.github.io/Blog/585a8d2f.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/my_avatar.png">
+      <meta itemprop="name" content="hzzzzzzzq">
+      <meta itemprop="description" content="工作是修心的道场">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="hzzzzzzzq">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          深入理解JavaScript系列（9）：bind
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2022-02-09 17:04:49" itemprop="dateCreated datePublished" datetime="2022-02-09T17:04:49+08:00">2022-02-09</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/JavaScript/" itemprop="url" rel="index"><span itemprop="name">JavaScript</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/JavaScript/%E6%B7%B1%E5%85%A5%E7%B3%BB%E5%88%97/" itemprop="url" rel="index"><span itemprop="name">深入系列</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      
+      <span>3.3k</span>
+    </span>
+    <span class="post-meta-item" title="3333阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      
+      <span>8 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p><code>bind</code> 函数与 <code>call</code>,<code>apply</code> 的区别是什么呢？</p>
+<ul>
+<li><code>bind</code> 函数并不是直接调用的，且返回函数可以参数</li>
+<li>参数一 与 <code>call、apply</code> 同样，指定的对象（该函数的执行上下文</li>
+<li>其他参数与 <code>call</code> 相同，都作为参数传入，但是 <code>apply</code> 只传入一个数组参数</li>
+</ul>
+<p>具体对照，可以看我上面的一篇文章，<a href="">JavaScript 深入之 call 和 apply 函数</a>。</p>
+<span id="more"></span>
+
+<p>我们来看 <code>bind</code> 的特点</p>
+<ul>
+<li>返回函数</li>
+<li>返回函数可以传参数</li>
+</ul>
+<h2 id="第一版-返回函数"><a href="#第一版-返回函数" class="headerlink" title="第一版 - 返回函数"></a>第一版 - 返回函数</h2><p>我们来看一下 <code>bind</code> 执行的返回效果吧：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> obj = &#123;</span><br><span class="line">  <span class="attr">name</span>: <span class="string">&#x27;hzzzzzzzq&#x27;</span>,</span><br><span class="line">  <span class="attr">age</span>: <span class="number">18</span>,</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">log</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="built_in">this</span>.name, <span class="built_in">this</span>.age);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> print = log.bind(obj);</span><br><span class="line">print();</span><br><span class="line"><span class="comment">// hzzzzzzzq 18</span></span><br></pre></td></tr></table></figure>
+
+<p>由此，我们来写文吗的第一版代码。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Function</span>.prototype.myBind = <span class="function"><span class="keyword">function</span> (<span class="params">context</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> self = <span class="built_in">this</span>;</span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> self.apply(context);</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>我们来看看结果，是不是一样了呢？</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> obj = &#123;</span><br><span class="line">  <span class="attr">name</span>: <span class="string">&#x27;hzzzzzzzq&#x27;</span>,</span><br><span class="line">  <span class="attr">age</span>: <span class="number">18</span>,</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">log</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="built_in">this</span>.name, <span class="built_in">this</span>.age);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> print = log.myBind(obj);</span><br><span class="line">print();</span><br><span class="line"><span class="comment">// hzzzzzzzq 18</span></span><br></pre></td></tr></table></figure>
+
+<p>这时候，我们得到了一个返回值，并且绑定。</p>
+<h2 id="第二版-传入参数"><a href="#第二版-传入参数" class="headerlink" title="第二版 - 传入参数"></a>第二版 - 传入参数</h2><p>我们来看看，不仅在 <code>bind</code> 函数中可以传入参数，其返回的函数也可以传入参数。<br>我们看下面的例子：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> obj = &#123;</span><br><span class="line">  <span class="attr">value</span>: <span class="number">1</span>,</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">log</span>(<span class="params">name, age</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="built_in">this</span>.value, name, age);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> print = log.bind(obj, <span class="string">&#x27;hzzzzzzzq&#x27;</span>);</span><br><span class="line">print(<span class="number">18</span>);</span><br><span class="line"><span class="comment">// 1 hzzzzzzzq 18</span></span><br></pre></td></tr></table></figure>
+
+<p>我们怎么加入参数呢？</p>
+<ol>
+<li>我们要获取调用 bind 函数时除了第一个绑定对象以外的参数</li>
+<li>我们要获取内部返回函数的参数</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Function</span>.prototype.myBind = <span class="function"><span class="keyword">function</span> (<span class="params">context</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> self = <span class="built_in">this</span>;</span><br><span class="line">  <span class="keyword">const</span> args = [].slice.call(<span class="built_in">arguments</span>, <span class="number">1</span>); <span class="comment">// 获取从第二个开始的全部参数</span></span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> subArgs = [].slice.call(<span class="built_in">arguments</span>); <span class="comment">// 获取 bind 返回函数的内部参数</span></span><br><span class="line">    <span class="keyword">return</span> self.apply(context, args.concat(subArgs));</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>第二版写完了。</p>
+<h2 id="第三版-作为构造函数使用的绑定函数"><a href="#第三版-作为构造函数使用的绑定函数" class="headerlink" title="第三版 - 作为构造函数使用的绑定函数"></a>第三版 - 作为构造函数使用的绑定函数</h2><p>接下来就是构造函数啦，最难的部分了。</p>
+<blockquote>
+<p>绑定函数自动适应于使用 <code>new</code> 操作符去构造一个由目标函数创建的新实例。当一个绑定函数是用来构建一个值的，原来提供的 <code>this</code> 就会被忽略</p>
+</blockquote>
+<p>我们来举个例子，看一下。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> value = <span class="number">2</span>;</span><br><span class="line"><span class="keyword">let</span> obj = &#123;</span><br><span class="line">  <span class="attr">value</span>: <span class="number">1</span>,</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">log</span>(<span class="params">name, age</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">this</span>.sport = <span class="string">&#x27;playing&#x27;</span>;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="built_in">this</span>.value, name, age);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> print = log.bind(obj, <span class="string">&#x27;hzzzzzzzq&#x27;</span>);</span><br><span class="line"><span class="keyword">let</span> obj2 = <span class="keyword">new</span> print(<span class="string">&#x27;18&#x27;</span>);</span><br><span class="line"><span class="comment">// undefined hzzzzzzzq 18</span></span><br><span class="line"><span class="built_in">console</span>.log(obj2.sport); <span class="comment">// playing</span></span><br></pre></td></tr></table></figure>
+
+<p>从上面结果，我们可以看出，使用 <code>new</code> 进行创建新实例时，<code>this</code> 指向绑定的 <code>obj</code> 已经失效了，返回 <code>undefined</code>。</p>
+<p>但是为什么不会指向全局变量呢？其实就是 <code>new</code> 操作，让现在的 <code>this</code> 指向了 <code>obj2</code>。</p>
+<p>可以来看看 <code>new</code> 操作是怎么实现的，参考我的这篇文章 - <a href="">《JavaScript 深入之 new 操作》</a>。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Function</span>.prototype.myBind = <span class="function"><span class="keyword">function</span> (<span class="params">context</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> self = <span class="built_in">this</span>;</span><br><span class="line">  <span class="keyword">const</span> args = [].slice.call(<span class="built_in">arguments</span>, <span class="number">1</span>); <span class="comment">// 获取从第二个开始的全部参数</span></span><br><span class="line">  <span class="keyword">const</span> resultFn = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> subArgs = [].slice.call(<span class="built_in">arguments</span>); <span class="comment">// 获取调用时传入的参数</span></span><br><span class="line">    <span class="keyword">return</span> self.apply(</span><br><span class="line">      <span class="built_in">this</span> <span class="keyword">instanceof</span> resultFn ? <span class="built_in">this</span> : context,</span><br><span class="line">      args.concat(subArgs) <span class="comment">// 拼接参数</span></span><br><span class="line">    );</span><br><span class="line">  &#125;;</span><br><span class="line">  resultFn.prototype = <span class="built_in">this</span>.prototype;</span><br><span class="line">  <span class="keyword">return</span> resultFn;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>肯定有人会对这句代码有疑问 <code>this instanceof resultFn ? this : context</code>，我们来解释一下。</p>
+<p>这里我们根据 <code>this</code> 与 <code>resultFn</code> 进行 <code>instanceof</code> 来判断是构造函数还是普通函数调用。</p>
+<ul>
+<li>构造函数，<code>this</code> 指向实例，判断结果为 <code>true</code>，将绑定函数的 <code>this</code> 指向该实例，可以让实例获得来自绑定函数的值。</li>
+<li>普通函数，<code>this</code> 指向 <code>window</code>，结果为 <code>false</code>，绑定函数的 <code>this</code> 指向 <code>context</code></li>
+</ul>
+<p>上面的代码真的实现了吗？</p>
+<p>好像还不够，存在问题，那就是返回函数的值修改时，也会导致原函数值的修改。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> bindObj = log.myBind(<span class="literal">null</span>);</span><br><span class="line">bindObj.prototype.name = <span class="string">&#x27;hzzzzzzzq&#x27;</span>;</span><br><span class="line"><span class="built_in">console</span>.log(obj.prototype.name); <span class="comment">// hzzzzzzzq</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="第四版-汇总"><a href="#第四版-汇总" class="headerlink" title="第四版 - 汇总"></a>第四版 - 汇总</h2><p>我们来汇总一下，我们实现 <code>bind</code> 函数的步骤。</p>
+<p>我们还会对上面的问题进行优化 - 就是通过一个额外的函数进行中转。</p>
+<blockquote>
+<ol>
+<li>判断调用对象是否为函数，即使我们是定义在函数的原型上的，但是可能出现使用 <code>call</code> 等方式调用的情况</li>
+<li>保存当前函数的引用，获取其余传入参数值</li>
+<li>创建一个函数返回</li>
+<li>函数内部使用 <code>apply</code> 来绑定函数调用，需要判断函数作为构造函数的情况，这个时候需要传入当前函数的 <code>this</code> 给 <code>apply</code> 调用，其余情况都传入指定的上下文对象</li>
+</ol>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Function</span>.prototype.myBind = <span class="function"><span class="keyword">function</span> (<span class="params">context</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (<span class="keyword">typeof</span> <span class="built_in">this</span> !== <span class="string">&#x27;function&#x27;</span>) &#123;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">&#x27;只有函数可以调用 myBind&#x27;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">const</span> self = <span class="built_in">this</span>;</span><br><span class="line">  <span class="keyword">const</span> args = [].slice.call(<span class="built_in">arguments</span>, <span class="number">1</span>);</span><br><span class="line">  <span class="keyword">const</span> fn = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;&#125;; <span class="comment">// 中转函数</span></span><br><span class="line">  <span class="keyword">const</span> resultFn = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> subArgs = [].slice.call(<span class="built_in">arguments</span>); <span class="comment">// 获取调用时传入的参数</span></span><br><span class="line">    <span class="keyword">return</span> self.apply(</span><br><span class="line">      <span class="built_in">this</span> <span class="keyword">instanceof</span> fn ? <span class="built_in">this</span> : context,</span><br><span class="line">      args.concat(subArgs) <span class="comment">// 拼接参数</span></span><br><span class="line">    );</span><br><span class="line">  &#125;;</span><br><span class="line">  fn.prototype = self.prototype;</span><br><span class="line">  resultFn.prototype = <span class="keyword">new</span> fn();</span><br><span class="line">  <span class="keyword">return</span> resultFn;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h2 id="文章参考"><a href="#文章参考" class="headerlink" title="文章参考"></a>文章参考</h2><p><a target="_blank" rel="noopener" href="https://github.com/mqyqingfeng/Blog/issues/12">JavaScript 深入之 bind 的模拟实现</a></p>
+
+    </div>
+
+    
+    
+    
+      
+  <div class="popular-posts-header">相关文章推荐</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/Blog/e7d07533.html" rel="bookmark">深入理解JavaScript系列（8）：call/apply</a></div>
+    </li>
+  </ul>
+
+    <div>
+      <div style="text-align:center;color:#bfbfbf;font-size:16px;">
+        <span>--------------------   本文结束   </span>
+        <i class="fa fa-heart"></i>
+        <span>   感谢阅读   --------------------</span>
+      </div>
+
+    </div>
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>Buy me a coffee</div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/wechatpay.png" alt="hzzzzzzzq 微信">
+        <span>微信</span>
+      </div>
+      <div>
+        <img src="/images/alipay.png" alt="hzzzzzzzq 支付宝">
+        <span>支付宝</span>
+      </div>
+
+  </div>
+</div>
+
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>hzzzzzzzq
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://hzzzzzzzq.github.io/Blog/585a8d2f.html" title="深入理解JavaScript系列（9）：bind">https://hzzzzzzzq.github.io/Blog/585a8d2f.html</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh-CN" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/call/" rel="tag"><i class="fa fa-tags"></i> call</a>
+              <a href="/tags/apply/" rel="tag"><i class="fa fa-tags"></i> apply</a>
+              <a href="/tags/bind/" rel="tag"><i class="fa fa-tags"></i> bind</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/Blog/e7d07533.html" rel="prev" title="深入理解JavaScript系列（8）：call/apply">
+                  <i class="fa fa-chevron-left"></i> 深入理解JavaScript系列（8）：call/apply
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/Blog/3a5c2743.html" rel="next" title="深入理解JavaScript系列（10）：new 关键字">
+                  深入理解JavaScript系列（10）：new 关键字 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+    <div class="comments gitalk-container"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright" style="color: #fff">
+  &copy; 
+  <span itemprop="copyrightYear" >2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder" style="color: #fff">hzzzzzzzq</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item" style="color: #fff">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">站点字数:127k</span>
+  </span>
+  <span class="post-meta-item" style="color: #fff">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">阅读时间:5:17</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon"  style="color: #fff">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv" style="color: #fff"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon" style="color: #fff">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv" style="color: #fff"></span>
+      </span>
+    </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lozad@1.16.0/dist/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.css" integrity="sha256-AJnUHL7dBv6PGaeyPQJcgQPDjt/Hn/PvYZde1iqfp8U=" crossorigin="anonymous">
+
+<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"hzzzzzzzq","repo":"hzzzzzzzq.github.io","client_id":"db7c4e0e53abcae5c547","client_secret":"d611e08d46b49ad9333ba38514f964cc7644ef8d","admin_user":"hzzzzzzzq","distraction_free_mode":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":"zh-CN","js":{"url":"https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.js","integrity":"sha256-Pmj85ojLaPOWwRtlMJwmezB/Qg8BzvJp5eTzvXaYAfA="},"path_md5":"829028f5b458080b66dbc81dd9e65c67"}</script>
+<script src="/js/third-party/comments/gitalk.js"></script>
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"left","width":150,"height":300},"mobile":{"show":true},"log":false});</script></body>
+</html>

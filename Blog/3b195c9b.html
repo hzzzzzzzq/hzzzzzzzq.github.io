@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.0.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/my_apple_icon_playball.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/my_favicon32_playball.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/my_favicon16_playball.png">
+  <link rel="mask-icon" href="/images/my_logo_playball.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic%7CPlayball:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"hzzzzzzzq.github.io","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.9.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+<meta name="description" content="深入理解JavaScript系列之原型与原型链，让我们彻底掌握原型与原型链。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="深入理解JavaScript系列（1）：原型与原型链">
+<meta property="og:url" content="https://hzzzzzzzq.github.io/Blog/3b195c9b.html">
+<meta property="og:site_name" content="hzzzzzzzq">
+<meta property="og:description" content="深入理解JavaScript系列之原型与原型链，让我们彻底掌握原型与原型链。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/hzzzzzzzq/Blog/main/asseats/images/js/prototype1.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/hzzzzzzzq/Blog/main/asseats/images/js/prototype2.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/hzzzzzzzq/Blog/main/asseats/images/js/prototype3.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/hzzzzzzzq/Blog/main/asseats/images/js/prototype4.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/hzzzzzzzq/Blog/main/asseats/images/js/prototype5.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/hzzzzzzzq/Blog/main/asseats/images/js/prototype6.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/hzzzzzzzq/Blog/main/asseats/images/js/prototype7.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/hzzzzzzzq/Blog/main/asseats/images/jsprototype8.png">
+<meta property="article:published_time" content="2022-02-09T09:04:49.711Z">
+<meta property="article:modified_time" content="2022-02-09T09:07:43.025Z">
+<meta property="article:author" content="hzzzzzzzq">
+<meta property="article:tag" content="原型">
+<meta property="article:tag" content="原型链">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/hzzzzzzzq/Blog/main/asseats/images/js/prototype1.png">
+
+
+<link rel="canonical" href="https://hzzzzzzzq.github.io/Blog/3b195c9b.html">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://hzzzzzzzq.github.io/Blog/3b195c9b.html","path":"/Blog/3b195c9b.html","title":"深入理解JavaScript系列（1）：原型与原型链"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>深入理解JavaScript系列（1）：原型与原型链 | hzzzzzzzq</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XYLG2D6KK6"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"G-XYLG2D6KK6","only_pageview":false}</script>
+  <script src="/js/third-party/analytics/google-analytics.js"></script>
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">hzzzzzzzq</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description" style="font-family:Playball">Welcome to my blog</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+        <li class="menu-item menu-item-commonweal"><a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>公益 404</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8E%9F%E5%9E%8B"><span class="nav-number">1.</span> <span class="nav-text">原型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%E5%88%9B%E5%BB%BA%E5%AF%B9%E8%B1%A1"><span class="nav-number">1.1.</span> <span class="nav-text">构造函数创建对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#prototype"><span class="nav-number">1.2.</span> <span class="nav-text">prototype</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#proto"><span class="nav-number">1.3.</span> <span class="nav-text">__proto__</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#constructor-NaN"><span class="nav-number">1.4.</span> <span class="nav-text">constructor</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E4%BE%8B%E4%B8%8E%E5%8E%9F%E5%9E%8B"><span class="nav-number">1.5.</span> <span class="nav-text">实例与原型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8E%9F%E5%9E%8B%E7%9A%84%E5%8E%9F%E5%9E%8B"><span class="nav-number">1.6.</span> <span class="nav-text">原型的原型</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8E%9F%E5%9E%8B%E9%93%BE"><span class="nav-number">2.</span> <span class="nav-text">原型链</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A1%A5%E5%85%85"><span class="nav-number">3.</span> <span class="nav-text">补充</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%8B%E4%B8%80%E7%AF%87%E6%96%87%E7%AB%A0"><span class="nav-number">4.</span> <span class="nav-text">下一篇文章</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="hzzzzzzzq"
+      src="/images/my_avatar.png">
+  <p class="site-author-name" itemprop="name">hzzzzzzzq</p>
+  <div class="site-description" itemprop="description">工作是修心的道场</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">40</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">21</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/hzzzzzzzq" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;hzzzzzzzq" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:hzzzzzzzq@gmail.com" title="E-Mail → mailto:hzzzzzzzq@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://hzzzzzzzq.github.io/Blog/3b195c9b.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/my_avatar.png">
+      <meta itemprop="name" content="hzzzzzzzq">
+      <meta itemprop="description" content="工作是修心的道场">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="hzzzzzzzq">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          深入理解JavaScript系列（1）：原型与原型链
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2022-02-09 17:04:49" itemprop="dateCreated datePublished" datetime="2022-02-09T17:04:49+08:00">2022-02-09</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/JavaScript/" itemprop="url" rel="index"><span itemprop="name">JavaScript</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/JavaScript/%E6%B7%B1%E5%85%A5%E7%B3%BB%E5%88%97/" itemprop="url" rel="index"><span itemprop="name">深入系列</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      
+      <span>3.1k</span>
+    </span>
+    <span class="post-meta-item" title="3333阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      
+      <span>8 分钟</span>
+    </span>
+</div>
+
+            <div class="post-description">深入理解JavaScript系列之原型与原型链，让我们彻底掌握原型与原型链。</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h2 id="原型"><a href="#原型" class="headerlink" title="原型"></a>原型</h2><h3 id="构造函数创建对象"><a href="#构造函数创建对象" class="headerlink" title="构造函数创建对象"></a>构造函数创建对象</h3><p>我们来写一个构造函数用来创建一个对象</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params"></span>) </span>&#123;&#125;</span><br><span class="line"><span class="keyword">let</span> person = <span class="keyword">new</span> Person();</span><br><span class="line">person.name = <span class="string">&#x27;hzzzzzzzq&#x27;</span>;</span><br><span class="line"><span class="built_in">console</span>.log(person.name); <span class="comment">// hzzzzzzzq</span></span><br></pre></td></tr></table></figure>
+
+<p>从例子中，我们使用 <code>new</code> 创建了一个实例对象 <code>person</code>。</p>
+<p>这我们都是可以理解的，<code>new</code> 创建实例对象。</p>
+<h3 id="prototype"><a href="#prototype" class="headerlink" title="prototype"></a>prototype</h3><p>每一个函数都有一个 <code>prototype</code> 属性，那么这个属性指向什么呢？</p>
+<p>其实，函数的 <code>prototype</code> 属性指向了一个对象，这个对象就是调用该构造函数而创建的实例的原型，也就是例子中，<code>person</code> 的原型。</p>
+<p>我们来打印一下 <code>Person</code> 的 <code>prototype</code>，来看看是什么。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params"></span>) </span>&#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(Person.prototype);</span><br></pre></td></tr></table></figure>
+
+<p><img data-src="https://raw.githubusercontent.com/hzzzzzzzq/Blog/main/asseats/images/js/prototype1.png" alt="prototype1"></p>
+<p>说了这么多，还是不知道什么是原型(0_o)。我们可以这样来理解原型：每一个 JS 对象(null 除外)在创建的时候就会有一个与之关联的另一个对象，而这个对象就是我们所说的原型，每一个对象都会从原型”继承”属性。</p>
+<p>我们简单来表示一下构造函数与实例原型之间的关系：</p>
+<p><img data-src="https://raw.githubusercontent.com/hzzzzzzzq/Blog/main/asseats/images/js/prototype2.png" alt="prototype2"></p>
+<p>我们从这张图中，可以看出，<code>Object.prototype</code> 表示实例原型。<br>那么我们该怎么表示实例(<code>person</code>)与实例原型(<code>Person.prototype</code>)之间的关系呢？所以我们来看看第二个属性</p>
+<h3 id="proto"><a href="#proto" class="headerlink" title="__proto__"></a><code>__proto__</code></h3><p>这是每一个 JS 对象(除了 <code>null</code>) 都具有的一个属性，叫 <code>__proto__</code>，这个属性会指向该对象的原型。</p>
+<p>我们来验证一下。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params"></span>) </span>&#123;&#125;</span><br><span class="line"><span class="keyword">let</span> person = <span class="keyword">new</span> Person();</span><br><span class="line"><span class="built_in">console</span>.log(person.__proto__ === Person.prototype);</span><br><span class="line"><span class="comment">// true</span></span><br><span class="line"><span class="built_in">console</span>.log(person.__proto__ === <span class="built_in">Object</span>.getPrototypeOf(person)); <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>注意: 当然，在这里我们要提一嘴，<code>__proto__</code> 在 <code>web</code> 标准中，以及删除，但是一些浏览器目前还是支持的。</strong></p>
+<blockquote>
+<p>所以在这里，我顺便提一个 <code>Object.getPrototypeOf(Object)</code>，用来获取实例的原型。</p>
+</blockquote>
+<p>于是，我们可以将图进行更新了：</p>
+<p><img data-src="https://raw.githubusercontent.com/hzzzzzzzq/Blog/main/asseats/images/js/prototype3.png" alt="prototype3"></p>
+<p>我们现在，构造函数指向原型，实例指向原型，那么原型能否指向构造函数或者指向实例呢？</p>
+<p>其实这时候我们就要提到下一个属性了，但是，指向实例的是没有的，因为一个构造函数可以生成多个实例。</p>
+<h3 id="constructor-NaN"><a href="#constructor-NaN" class="headerlink" title="constructor"></a>constructor</h3><p>这是我们提到的第三个属性了，而这个属性，就是用来实现由原型指向构造函数，每一个原型都会有一个 <code>constructor</code> 属性来指向关联的构造函数。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params"></span>) </span>&#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(Person === Person.prototype.constructor);</span><br><span class="line"><span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+
+<p>所以我们继续更新关系图：</p>
+<p><img data-src="https://raw.githubusercontent.com/hzzzzzzzq/Blog/main/asseats/images/js/prototype4.png" alt="prototype4"></p>
+<p>到目前为止，我们已经得出来一些结论了。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params"></span>) </span>&#123;&#125;</span><br><span class="line"><span class="keyword">let</span> person = <span class="keyword">new</span> Person();</span><br><span class="line"><span class="built_in">console</span>.log(person.__protp__ === Person.prototype); <span class="comment">//true</span></span><br><span class="line"><span class="built_in">console</span>.log(Person.prototype.constructor === Person); <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+
+<p>了解了构造函数、实例原型和实例之间的关系后，我们来看看实例和原型的关系：</p>
+<h3 id="实例与原型"><a href="#实例与原型" class="headerlink" title="实例与原型"></a>实例与原型</h3><p>在我们读取实例的属性时，如果找不到，就会查找与对象关联的原型中的属性，如果还查不到，就会去找原型的原型，直到最顶层为止。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params"></span>) </span>&#123;&#125;</span><br><span class="line">Person.prototype.name = <span class="string">&#x27;hzzzzzzzq&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> person = <span class="keyword">new</span> Person();</span><br><span class="line"></span><br><span class="line">person.name = <span class="string">&#x27;qzzzzzzzh&#x27;</span>;</span><br><span class="line">coonsole.log(person.name); <span class="comment">// qzzzzzzzh</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">delete</span> person.name;</span><br><span class="line">coonsole.log(person.name); <span class="comment">// hzzzzzzzq</span></span><br></pre></td></tr></table></figure>
+
+<p>从例子来看，我们给原型对象添加了 <code>name</code> 属性，然后在给实例对象添加了 <code>name</code> 属性，而首先打印时，打印了实例对象的 <code>name</code>。</p>
+<p>但是当我们删除了实例对象的 <code>name</code> 属性时，在实例中就找不到该属性，则会从实例的原型是那个去查找，所以在 <code>Person.prototype</code> 中找到。</p>
+<p>但是，如果我们的原型中没找到呢？原型的原型又是什么呢？</p>
+<h3 id="原型的原型"><a href="#原型的原型" class="headerlink" title="原型的原型"></a>原型的原型</h3><p>原型是什么？其实原型也是一个对象，既然是对象，那我们就可以用 <code>new Object()</code> 来创建它：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> obj = <span class="keyword">new</span> <span class="built_in">Object</span>();</span><br><span class="line">obj.name = <span class="string">&#x27;hzzzzzzzq&#x27;</span>;</span><br><span class="line"><span class="built_in">console</span>.log(obj.name); <span class="comment">// hzzzzzzzq</span></span><br></pre></td></tr></table></figure>
+
+<p>而我们再来看一下，Person.prototype 与 Object 的关系.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params"></span>) </span>&#123;&#125;</span><br><span class="line"><span class="built_in">console</span>.log(Person.prototype.__proto__ === <span class="built_in">Object</span>.prototype); <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+
+<p>其实原型对象就是通过 <code>Object</code> 构造函数生成的，实例的 <code>__proro__</code> 指向构造函数的 <code>prototype</code>，现在我们再来更新一下关系图：</p>
+<p><img data-src="https://raw.githubusercontent.com/hzzzzzzzq/Blog/main/asseats/images/js/prototype5.png" alt="prototype5"></p>
+<h2 id="原型链"><a href="#原型链" class="headerlink" title="原型链"></a>原型链</h2><p>其实，看完原型的原型，还是会有疑问，Object.prototype 的原型是什么呢？</p>
+<p>其实就是 <code>null</code>，我们可以来验证一下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(Obejct.prototype.__proto__ === <span class="literal">null</span>);</span><br><span class="line"><span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+
+<p>而 <code>null</code> 是什么呢？</p>
+<blockquote>
+<p>null 就是表示”没有对象”，即在这里不应该有值。</p>
+</blockquote>
+<p>因为 <code>Object.prototype.__proto__</code> 的值为 <code>null</code>。所以查找属性的时候其实查到 <code>Object.prototype</code> 就可以停止了。</p>
+<p>我们在来更新一下关系图：</p>
+<p><img data-src="https://raw.githubusercontent.com/hzzzzzzzq/Blog/main/asseats/images/js/prototype6.png" alt="prototype6"></p>
+<p>那什么是原型链呢？相互关联的原型组成的链状结构就是原型链，也就是这条红色的线。</p>
+<h2 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h2><p>你以为这就结束了吗？</p>
+<p>我们来看看在来补充一些神奇的事情，我们来看看打印。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params"></span>) </span>&#123;&#125;</span><br><span class="line"><span class="built_in">console</span>.log(Person.__proto__ === <span class="built_in">Function</span>.prototype); <span class="comment">// true</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Object</span>.prototype.constructor.__proto__ === <span class="built_in">Function</span>.prototype); <span class="comment">//true</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Object</span>.prototype === <span class="built_in">Function</span>.prototype.__proto__); <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+
+<p>经过测试我们会发现，都会 <code>true</code>。</p>
+<p>这意味着什么呢？</p>
+<ul>
+<li><code>Person</code> 函数的原型是 <code>Function.prototype</code></li>
+<li><code>Function.prototype</code> 也是 <code>Object</code> 构造函数的 <code>__proto__</code></li>
+<li><code>Function.prototype.__proto__</code> 就是 <code>Object.prorotype</code></li>
+</ul>
+<p>于是，我们的图就可以更新为如下关系图：</p>
+<p><img data-src="https://raw.githubusercontent.com/hzzzzzzzq/Blog/main/asseats/images/js/prototype7.png" alt="prototype7"></p>
+<p>至此，我们的关系图已经基本完善。</p>
+<p>再次，我也需要补充一张找到的图，应该说，真的很好，因为我自己画的比较乱。(0_o)</p>
+<p><img data-src="https://raw.githubusercontent.com/hzzzzzzzq/Blog/main/asseats/images/jsprototype8.png" alt="prototype8"></p>
+<h2 id="下一篇文章"><a href="#下一篇文章" class="headerlink" title="下一篇文章"></a>下一篇文章</h2><p><a href="">JavaScript 深入之执行栈</a></p>
+
+    </div>
+
+    
+    
+    
+      
+
+    <div>
+      <div style="text-align:center;color:#bfbfbf;font-size:16px;">
+        <span>--------------------   本文结束   </span>
+        <i class="fa fa-heart"></i>
+        <span>   感谢阅读   --------------------</span>
+      </div>
+
+    </div>
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>Buy me a coffee</div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/wechatpay.png" alt="hzzzzzzzq 微信">
+        <span>微信</span>
+      </div>
+      <div>
+        <img src="/images/alipay.png" alt="hzzzzzzzq 支付宝">
+        <span>支付宝</span>
+      </div>
+
+  </div>
+</div>
+
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>hzzzzzzzq
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://hzzzzzzzq.github.io/Blog/3b195c9b.html" title="深入理解JavaScript系列（1）：原型与原型链">https://hzzzzzzzq.github.io/Blog/3b195c9b.html</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh-CN" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/%E5%8E%9F%E5%9E%8B/" rel="tag"><i class="fa fa-tags"></i> 原型</a>
+              <a href="/tags/%E5%8E%9F%E5%9E%8B%E9%93%BE/" rel="tag"><i class="fa fa-tags"></i> 原型链</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/Blog/dd03fa62.html" rel="prev" title="个人博客搭建之 Hexo - NexT 主题下配置 Gitalk/Disqus 评论系统">
+                  <i class="fa fa-chevron-left"></i> 个人博客搭建之 Hexo - NexT 主题下配置 Gitalk/Disqus 评论系统
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/Blog/38c87206.html" rel="next" title="深入理解JavaScript系列（2）：执行上下文栈">
+                  深入理解JavaScript系列（2）：执行上下文栈 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+    <div class="comments gitalk-container"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright" style="color: #fff">
+  &copy; 
+  <span itemprop="copyrightYear" >2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder" style="color: #fff">hzzzzzzzq</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item" style="color: #fff">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">站点字数:127k</span>
+  </span>
+  <span class="post-meta-item" style="color: #fff">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">阅读时间:5:17</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon"  style="color: #fff">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv" style="color: #fff"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon" style="color: #fff">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv" style="color: #fff"></span>
+      </span>
+    </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lozad@1.16.0/dist/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.css" integrity="sha256-AJnUHL7dBv6PGaeyPQJcgQPDjt/Hn/PvYZde1iqfp8U=" crossorigin="anonymous">
+
+<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"hzzzzzzzq","repo":"hzzzzzzzq.github.io","client_id":"db7c4e0e53abcae5c547","client_secret":"d611e08d46b49ad9333ba38514f964cc7644ef8d","admin_user":"hzzzzzzzq","distraction_free_mode":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":"zh-CN","js":{"url":"https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.js","integrity":"sha256-Pmj85ojLaPOWwRtlMJwmezB/Qg8BzvJp5eTzvXaYAfA="},"path_md5":"3daf1c5c9525651841df17e627b2fd54"}</script>
+<script src="/js/third-party/comments/gitalk.js"></script>
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"left","width":150,"height":300},"mobile":{"show":true},"log":false});</script></body>
+</html>

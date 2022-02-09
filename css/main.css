@@ -2924,8 +2924,44 @@ body {
   background-position: 50% 50%;
   background-size: inner;
 }
-.main-inner {
+.post-block {
+  padding-top: 30px;
+  padding-left: 30px;
+  padding-right: 30px;
+  margin: 20px 0px;
+  border-radius: 30px;
+  box-shadow: 2px 2px 5px rgba(255,255,255,0.1), -2px 2px 2px rgba(255,255,255,0.1);
   background: rgba(255,255,255,0.8) none repeat scroll !important;
+}
+.post-block:first-of-type {
+  margin-top: 0;
+}
+.post-block:last-of-type .post-eof {
+  display: block;
+}
+.posts-expand .post-header {
+  margin-bottom: 20px;
+}
+.post-footer .post-nav {
+  padding-bottom: 20px;
+}
+.post-button {
+  margin-top: 10px;
+}
+.post-button .btn {
+  border-radius: 20px;
+  transition: all 0.5s;
+  border: 2px solid #eee;
+}
+.post-button .btn:hover {
+  background-image: linear-gradient(#1999b5, #49b395, #2ea652) !important;
+  border: 0px;
+}
+.post-eof {
+  margin: 20px auto;
+}
+.main-inner {
+  background: rgba(255,255,255,0) none repeat scroll !important;
 }
 .sidebar-inner {
   background: rgba(255,255,255,0.8) none repeat scroll !important;
