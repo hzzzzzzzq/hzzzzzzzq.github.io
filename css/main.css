@@ -2939,6 +2939,12 @@ body {
 .post-block:last-of-type .post-eof {
   display: block;
 }
+.posts-collapse .post-content::before {
+  height: 93%;
+}
+.post-block .post-content {
+  padding-bottom: 20px;
+}
 .posts-expand .post-header {
   margin-bottom: 20px;
 }
