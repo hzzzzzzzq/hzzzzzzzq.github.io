@@ -2951,7 +2951,7 @@ body {
 .post-button .btn {
   border-radius: 20px;
   transition: all 0.5s;
-  border: 2px solid #eee;
+  border: none;
 }
 .post-button .btn:hover {
   background-image: linear-gradient(#1999b5, #49b395, #2ea652) !important;
