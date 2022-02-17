@@ -28,7 +28,7 @@
 <meta property="og:description" content="ES 6 系列的第七篇文章，Set 和 Map，在 ES 6 中，新增加了两种数据结构。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-01-18T04:58:41.115Z">
-<meta property="article:modified_time" content="2022-01-19T07:02:22.762Z">
+<meta property="article:modified_time" content="2022-02-17T01:08:54.102Z">
 <meta property="article:author" content="hzzzzzzzq">
 <meta property="article:tag" content="ES 6">
 <meta name="twitter:card" content="summary">
@@ -332,7 +332,7 @@
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> map = <span class="keyword">new</span> <span class="built_in">Map</span>();</span><br><span class="line"><span class="keyword">const</span> obj = &#123;&#125;;</span><br><span class="line">map.set(obj, <span class="string">&#x27;object&#x27;</span>);</span><br><span class="line"><span class="built_in">console</span>.log(map.get(obj)); <span class="comment">// &#x27;object&#x27;</span></span><br><span class="line">map.set(<span class="string">&#x27;string&#x27;</span>, <span class="string">&#x27;hello hzzzzzzzq&#x27;</span>);</span><br><span class="line"><span class="built_in">console</span>.log(map.get(<span class="string">&#x27;string&#x27;</span>)); <span class="comment">// &#x27;hello hzzzzzzzq&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(map.has(obj)); <span class="comment">// true</span></span><br><span class="line"><span class="built_in">console</span>.log(map.has(<span class="string">&#x27;string&#x27;</span>)); <span class="comment">// true</span></span><br><span class="line"><span class="built_in">console</span>.log(map.delete(<span class="string">&#x27;string&#x27;</span>)); <span class="comment">// true</span></span><br><span class="line"><span class="built_in">console</span>.log(map.has(<span class="string">&#x27;string&#x27;</span>)); <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
 
 <p>上面我们就可以看出，我们将对象 <code>obj</code> 作为一个<code>Map</code> 的键传入，使用 <code>get</code> 获取值，<code>delete</code> 删除，<code>has</code> 作为判断是否有这个值。</p>
-<p>我们在来看看，<code>Map</code> 作为构造函数，怎么添加成员。<br>其实在<a href="">对象的扩展</a>中，我们已经提到过了。</p>
+<p>我们在来看看，<code>Map</code> 作为构造函数，怎么添加成员。<br>其实在<a href="https://hzzzzzzzq.github.io/Blog/c36ebee2.html">对象的扩展</a>中，我们已经提到过了。</p>
 <ul>
 <li>接受数组作为参数，而数组的成员是一个个表示键值对的数组。</li>
 </ul>

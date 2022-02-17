@@ -28,7 +28,7 @@
 <meta property="og:description" content="ES 6 系列的第六篇文章，对象的扩展，在 ES 6 中，对象也有了许多变化。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-01-18T04:58:23.472Z">
-<meta property="article:modified_time" content="2022-01-19T07:02:22.762Z">
+<meta property="article:modified_time" content="2022-02-17T01:09:16.434Z">
 <meta property="article:author" content="hzzzzzzzq">
 <meta property="article:tag" content="ES 6">
 <meta name="twitter:card" content="summary">
@@ -340,9 +340,9 @@
 <li>最后才是 <code>Symbol</code>，按照加入时间升序</li>
 </ul>
 </blockquote>
-<h2 id="对象的扩展运算符"><a href="#对象的扩展运算符" class="headerlink" title="对象的扩展运算符"></a>对象的扩展运算符</h2><p>在 <a target="_blank" rel="noopener" href="https://github.com/hzzzzzzzq/Blog/issues/4">解构赋值</a> 和 <a target="_blank" rel="noopener" href="https://github.com/hzzzzzzzq/Blog/issues/7">数组的扩展</a> 中，我们分别提到过对象的解构赋值以及扩展运算符。</p>
+<h2 id="对象的扩展运算符"><a href="#对象的扩展运算符" class="headerlink" title="对象的扩展运算符"></a>对象的扩展运算符</h2><p>在 <a href="https://hzzzzzzzq.github.io/Blog/1c84e2dc.html">解构赋值</a> 和 <a href="https://hzzzzzzzq.github.io/Blog/15284f3d.html">数组的扩展</a> 中，我们分别提到过对象的解构赋值以及扩展运算符。</p>
 <p>我们来看看扩展运算符在对象中的使用。</p>
-<h3 id="解构赋值"><a href="#解构赋值" class="headerlink" title="解构赋值"></a>解构赋值</h3><p>我们来回顾一下 <a target="_blank" rel="noopener" href="https://github.com/hzzzzzzzq/Blog/issues/4">解构赋值</a> 。</p>
+<h3 id="解构赋值"><a href="#解构赋值" class="headerlink" title="解构赋值"></a>解构赋值</h3><p>我们来回顾一下 <a href="https://hzzzzzzzq.github.io/Blog/1c84e2dc.html">解构赋值</a> 。</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> &#123; x, y &#125; = &#123; <span class="attr">x</span>: <span class="number">1</span>, <span class="attr">y</span>: <span class="number">2</span> &#125;;</span><br><span class="line"><span class="built_in">console</span>.log(x); <span class="comment">// 1</span></span><br><span class="line"><span class="built_in">console</span>.log(y); <span class="comment">// 2</span></span><br></pre></td></tr></table></figure>
 
 <ul>
@@ -429,7 +429,7 @@
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> obj = &#123; <span class="attr">x</span>: <span class="number">1</span>, <span class="attr">y</span>: <span class="number">2</span> &#125;;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> [k, v] <span class="keyword">of</span> <span class="built_in">Object</span>.entries(obj)) &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">`key = <span class="subst">$&#123;k&#125;</span>, val = <span class="subst">$&#123;v&#125;</span>`</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// key = x, val = 1</span></span><br><span class="line"><span class="comment">// key = y, val = 2</span></span><br></pre></td></tr></table></figure>
 
 <ul>
-<li>将对象转为真正的 <a href="">Map 结构</a></li>
+<li>将对象转为真正的 <a href="https://hzzzzzzzq.github.io/Blog/e5a445b0.html">Map 结构</a></li>
 </ul>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> obj = &#123; <span class="attr">x</span>: <span class="number">1</span>, <span class="attr">y</span>: <span class="number">2</span> &#125;;</span><br><span class="line"><span class="keyword">const</span> map = <span class="keyword">new</span> <span class="built_in">Map</span>(<span class="built_in">Object</span>.entries(obj));</span><br><span class="line"><span class="built_in">console</span>.log(map);</span><br><span class="line"><span class="comment">// Map &#123; x: 1, y: 2 &#125;</span></span><br></pre></td></tr></table></figure>
 
@@ -438,7 +438,7 @@
 
 <h3 id="用途"><a href="#用途" class="headerlink" title="用途"></a>用途</h3><p>主要作用就是，是将键值对的数据结构还原为对象</p>
 <ul>
-<li>将 <a target="_blank" rel="noopener" href="https://github.com/hzzzzzzzq/Blog/issues/9"><code>Map</code> 结构</a>转为对象</li>
+<li>将 <a href="https://hzzzzzzzq.github.io/Blog/e5a445b0.html"><code>Map</code> 结构</a>转为对象</li>
 </ul>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> map = <span class="keyword">new</span> <span class="built_in">Map</span>();</span><br><span class="line">map.set(<span class="string">&#x27;x&#x27;</span>, <span class="number">1</span>);</span><br><span class="line">map.set(<span class="string">&#x27;y&#x27;</span>, <span class="number">2</span>);</span><br><span class="line">map.set(<span class="string">&#x27;z&#x27;</span>, <span class="number">3</span>);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Object</span>.fromEntries(map));</span><br><span class="line"><span class="comment">// &#123; x: 1, y: 2, z: 3 &#125;</span></span><br></pre></td></tr></table></figure>
 
