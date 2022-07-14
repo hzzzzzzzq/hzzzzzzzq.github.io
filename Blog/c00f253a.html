@@ -20,33 +20,36 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"hzzzzzzzq.github.io","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.9.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
-<meta name="description" content="CSS 系列的第四篇文章，BFC，相信，同学们都听过 BFC 吧，但是它到底是什么呢？我们一起来看看吧！">
+<meta name="description" content="CSS 系列的第二篇文章，盒模型，这也是面试题中，经常会问到的题目！">
 <meta property="og:type" content="article">
-<meta property="og:title" content="CSS 系列之BFC">
-<meta property="og:url" content="https://hzzzzzzzq.github.io/Blog/5a2d113b.html">
+<meta property="og:title" content="CSS 系列之盒模型">
+<meta property="og:url" content="https://hzzzzzzzq.github.io/Blog/c00f253a.html">
 <meta property="og:site_name" content="hzzzzzzzq">
-<meta property="og:description" content="CSS 系列的第四篇文章，BFC，相信，同学们都听过 BFC 吧，但是它到底是什么呢？我们一起来看看吧！">
+<meta property="og:description" content="CSS 系列的第二篇文章，盒模型，这也是面试题中，经常会问到的题目！">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://raw.githubusercontent.com/hzzzzzzzq/Blog/main/asseats/images/css/BFC/BFC1.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/hzzzzzzzq/Blog/main/asseats/images/css/BFC/BFC2.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/hzzzzzzzq/Blog/main/asseats/images/css/BFC/BFC3.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/hzzzzzzzq/Blog/main/asseats/images/css/BFC/BFC4.png">
-<meta property="article:published_time" content="2022-01-20T07:53:00.479Z">
-<meta property="article:modified_time" content="2022-07-14T08:37:17.069Z">
+<meta property="og:image" content="https://raw.githubusercontent.com/hzzzzzzzq/Blog/main/asseats/images/css/box-model/box-model1.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/hzzzzzzzq/Blog/main/asseats/images/css/box-model/box-model2.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/hzzzzzzzq/Blog/main/asseats/images/css/box-model/box-model3.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/hzzzzzzzq/Blog/main/asseats/images/css/box-model/box-model4.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/hzzzzzzzq/Blog/main/asseats/images/css/box-model/box-model5.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/hzzzzzzzq/Blog/main/asseats/images/css/box-model/box-model6.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/hzzzzzzzq/Blog/main/asseats/images/css/box-model/box-model7.png">
+<meta property="article:published_time" content="2022-01-20T07:45:15.431Z">
+<meta property="article:modified_time" content="2022-07-14T08:37:07.302Z">
 <meta property="article:author" content="hzzzzzzzq">
 <meta property="article:tag" content="CSS">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://raw.githubusercontent.com/hzzzzzzzq/Blog/main/asseats/images/css/BFC/BFC1.png">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/hzzzzzzzq/Blog/main/asseats/images/css/box-model/box-model1.png">
 
 
-<link rel="canonical" href="https://hzzzzzzzq.github.io/Blog/5a2d113b.html">
+<link rel="canonical" href="https://hzzzzzzzq.github.io/Blog/c00f253a.html">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://hzzzzzzzq.github.io/Blog/5a2d113b.html","path":"/Blog/5a2d113b.html","title":"CSS 系列之BFC"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://hzzzzzzzq.github.io/Blog/c00f253a.html","path":"/Blog/c00f253a.html","title":"CSS 系列之盒模型"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>CSS 系列之BFC | hzzzzzzzq</title>
+<title>CSS 系列之盒模型 | hzzzzzzzq</title>
   
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-XYLG2D6KK6"></script>
   <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"G-XYLG2D6KK6","only_pageview":false}</script>
@@ -156,7 +159,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF-BFC%EF%BC%9F"><span class="nav-number">1.</span> <span class="nav-text">什么是 BFC？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#BFC-%E5%8E%9F%E7%90%86"><span class="nav-number">2.</span> <span class="nav-text">BFC 原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%A6%E5%8F%91-BFC"><span class="nav-number">3.</span> <span class="nav-text">触发 BFC</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#BFC-%E7%89%B9%E6%80%A7%E5%8F%8A%E5%BA%94%E7%94%A8"><span class="nav-number">4.</span> <span class="nav-text">BFC 特性及应用</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A0%87%E5%87%86%E6%A8%A1%E5%9E%8B-IE-%E6%A8%A1%E5%9E%8B"><span class="nav-number">1.</span> <span class="nav-text">标准模型+IE 模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%A4%E7%A7%8D%E7%9B%92%E6%A8%A1%E5%9E%8B%E5%8C%BA%E5%88%AB"><span class="nav-number">2.</span> <span class="nav-text">两种盒模型区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%A4%E7%A7%8D%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%AE%BD%E5%92%8C%E9%AB%98"><span class="nav-number">3.</span> <span class="nav-text">两种模型的宽和高</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%96%E8%BE%B9%E8%B7%9D-margin-%E9%87%8D%E5%8F%A0"><span class="nav-number">3.1.</span> <span class="nav-text">外边距(margin)重叠</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -229,7 +232,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://hzzzzzzzq.github.io/Blog/5a2d113b.html">
+    <link itemprop="mainEntityOfPage" href="https://hzzzzzzzq.github.io/Blog/c00f253a.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/my_avatar.png">
@@ -242,7 +245,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          CSS 系列之BFC
+          CSS 系列之盒模型
         </h1>
 
         <div class="post-meta-container">
@@ -253,7 +256,7 @@
       </span>
       <span class="post-meta-item-text">发表于</span>
 
-      <time title="创建时间：2022-01-20 15:53:00" itemprop="dateCreated datePublished" datetime="2022-01-20T15:53:00+08:00">2022-01-20</time>
+      <time title="创建时间：2022-01-20 15:45:15" itemprop="dateCreated datePublished" datetime="2022-01-20T15:45:15+08:00">2022-01-20</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -279,18 +282,18 @@
         <i class="far fa-file-word"></i>
       </span>
       
-      <span>1.9k</span>
+      <span>1.4k</span>
     </span>
     <span class="post-meta-item" title="3333阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       
-      <span>5 分钟</span>
+      <span>3 分钟</span>
     </span>
 </div>
 
-            <div class="post-description">CSS 系列的第四篇文章，BFC，相信，同学们都听过 BFC 吧，但是它到底是什么呢？我们一起来看看吧！</div>
+            <div class="post-description">CSS 系列的第二篇文章，盒模型，这也是面试题中，经常会问到的题目！</div>
         </div>
       </header>
 
@@ -298,52 +301,50 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <h2 id="什么是-BFC？"><a href="#什么是-BFC？" class="headerlink" title="什么是 BFC？"></a>什么是 BFC？</h2><p><code>BFC</code> 即 <code>Block Formatting Contexts</code> (块级格式化上下文)，它属于定位方案中的普通流。</p>
-<p>我们可以把具有 <code>BFC</code> 特性的元素看作为<strong>隔离了的独立容器</strong>，容器内的元素不会在布局上影响到外面的元素，并且 <code>BFC</code> 具有普通容器所没有的一些特性。</p>
-<p>简单来说，就是 <code>BFC</code> 有一个自己的空间，在空间内怎么做，都不会影响外面。</p>
-<h2 id="BFC-原理"><a href="#BFC-原理" class="headerlink" title="BFC 原理"></a>BFC 原理</h2><ul>
-<li><code>BFC</code> 元素垂直方向的边距会发生重叠，属于不同 <code>BFC</code> 的外边距不会发生重叠。</li>
-<li><code>BFC</code> 区域不会与浮动元素的布局重叠。</li>
-<li><code>BFC</code> 元素是一个独立的容器，外面的元素不会影响到内部元素，同样，内部元素也不会影响外部元素。</li>
-<li>浮动元素也会参与 <code>BFC</code> 高度的计算。</li>
-</ul>
-<h2 id="触发-BFC"><a href="#触发-BFC" class="headerlink" title="触发 BFC"></a>触发 BFC</h2><p>只要元素满足下面任一条件即可出发 BFC 特性</p>
+        <h2 id="标准模型-IE-模型"><a href="#标准模型-IE-模型" class="headerlink" title="标准模型+IE 模型"></a>标准模型+IE 模型</h2><p>盒模型又称框模型，包含了内容(<code>content</code>)、内边距(<code>padding</code>)、边框(<code>border</code>)、外边距(<code>margin</code>)四个要素。<br>具体排布如下图所示。</p>
+<p><img data-src="https://raw.githubusercontent.com/hzzzzzzzq/Blog/main/asseats/images/css/box-model/box-model1.png" alt="box-model1"></p>
+<p>盒模型分为两种</p>
 <ul>
-<li><code>body</code> 根元素</li>
-<li>浮动元素： <code>float</code> 除 <code>none</code> 以外的值</li>
-<li>绝对定位元素：<code>position</code> 的 <code>absolute</code> 和 <code>fixed</code></li>
-<li><code>display</code> 为 <code>inline-block</code>、<code>table-cells</code>、<code>flex</code></li>
-<li><code>overflow</code> 除了 <code>visible</code> 之外的值 (如：<code>hidden</code>、<code>auto</code>、<code>scroll</code>)</li>
+<li>标准模型</li>
+<li>IE 模型</li>
 </ul>
-<h2 id="BFC-特性及应用"><a href="#BFC-特性及应用" class="headerlink" title="BFC 特性及应用"></a>BFC 特性及应用</h2><p><strong>1. 同一个 BFC 下外边距会发生折叠</strong></p>
+<h2 id="两种盒模型区别"><a href="#两种盒模型区别" class="headerlink" title="两种盒模型区别"></a>两种盒模型区别</h2><p>两种模型的<strong>内容宽高计算方式不同</strong></p>
+<ul>
+<li>IE 模型元素宽度 <code>width = content + padding + border</code>，高度类似宽度计算。</li>
+</ul>
+<p><img data-src="https://raw.githubusercontent.com/hzzzzzzzq/Blog/main/asseats/images/css/box-model/box-model2.png" alt="box-model2"></p>
+<ul>
+<li>标准模型元素宽度 <code>width = content</code>，高度类似宽度计算。</li>
+</ul>
+<p><img data-src="https://raw.githubusercontent.com/hzzzzzzzq/Blog/main/asseats/images/css/box-model/box-model3.png" alt="box-model3"></p>
+<h2 id="两种模型的宽和高"><a href="#两种模型的宽和高" class="headerlink" title="两种模型的宽和高"></a>两种模型的宽和高</h2><p>通过 <code>css3</code> 新增的属性 <code>box-sizing</code> 可以设置盒模型类型。**在不设置 <code>box-sizing</code> 的情况下，默认为 <code>content-box</code>**。</p>
+<ul>
+<li>标准模型 - <code>content-box</code></li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.content-box</span> &#123;</span><br><span class="line">  <span class="attribute">box-sizing</span>: content-box;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">100px</span>;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">100px</span>;</span><br><span class="line">  <span class="attribute">border</span>: <span class="number">5px</span> solid <span class="number">#1890ff</span>;</span><br><span class="line">  <span class="attribute">padding</span>: <span class="number">10px</span>;</span><br><span class="line">  <span class="attribute">margin</span>: <span class="number">15px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img data-src="https://raw.githubusercontent.com/hzzzzzzzq/Blog/main/asseats/images/css/box-model/box-model4.png" alt="box-model4"></p>
+<p><code>content-box </code>设置为标准模型，从图上看，我们就可以知道，我们设置的 <code>width</code> 属性，指的是 <code>content</code> 的宽度。所以我们来计算元素宽度： <code>content-width + 2 * border + 2 * padding = 130px</code>。</p>
+<ul>
+<li>IE 模型 - <code>border-box</code></li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.border-box</span> &#123;</span><br><span class="line">  <span class="attribute">box-sizing</span>: border-box;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">100px</span>;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">100px</span>;</span><br><span class="line">  <span class="attribute">border</span>: <span class="number">5px</span> solid <span class="number">#1890ff</span>;</span><br><span class="line">  <span class="attribute">padding</span>: <span class="number">10px</span>;</span><br><span class="line">  <span class="attribute">margin</span>: <span class="number">15px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img data-src="https://raw.githubusercontent.com/hzzzzzzzq/Blog/main/asseats/images/css/box-model/box-model5.png" alt="box-model5"></p>
+<p><code>.border-box</code> 设置为 <code>IE</code> 模型，从上图看，我们就可以知道，它的元素宽度为 <code>content-width + 2 * padding + 2 * border = 70px + 2 * 10px + 2 * 5px = 100px</code>。所以元素的宽度就是我们设置的 <code>width: 100px;</code>。而内容的宽度则是 <code>width - 2 * padding - 2 * border = 70px</code>。</p>
+<h3 id="外边距-margin-重叠"><a href="#外边距-margin-重叠" class="headerlink" title="外边距(margin)重叠"></a>外边距(margin)重叠</h3><p>在使用中，在垂直方向上，有两个外边距重叠时，会合并成一个外边距，高度等于两者中的较大者。</p>
+<p>需要注意的是，只有在普通文档流中，才会发生合并。行内框、浮动框或绝对定位之间的外边距并不会发生合并。</p>
+<p><img data-src="https://raw.githubusercontent.com/hzzzzzzzq/Blog/main/asseats/images/css/box-model/box-model6.png" alt="box-model6"></p>
+<p>合并之前，是 <code>30px</code>，合并之后以大的值保留，剩下<code>20</code>。</p>
+<p>我们来举个例子。</p>
 <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.box</span> &#123;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">100px</span>;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">100px</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.first</span> &#123;</span><br><span class="line">  <span class="attribute">margin-bottom</span>: <span class="number">100px</span>;</span><br><span class="line">  <span class="attribute">background-color</span>: orange;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.second</span> &#123;</span><br><span class="line">  <span class="attribute">margin-top</span>: <span class="number">50px</span>;</span><br><span class="line">  <span class="attribute">background-color</span>: wheat;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;box first&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;box second&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;box first&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;box second&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
-<p><img data-src="https://raw.githubusercontent.com/hzzzzzzzq/Blog/main/asseats/images/css/BFC/BFC1.png" alt="BFC1"></p>
-<p>从结果来看，两个 <code>div</code> 元素都处在同一个 <code>BFC</code> 容器下，也就是 <code>body</code> 根元素。所以 <code>first</code> 的下边距与 <code>second</code> 的上边距发生重叠，且保留大的值。所以两个元素之间的距离只有 <code>100px</code>，而不是 <code>150px</code>。</p>
-<p>我们想要两个盒子不进行折叠，这时候只需要将两个盒子设置为 <code>BFC</code> 容器就可以了。</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.container</span> &#123;</span><br><span class="line">  <span class="attribute">overflow</span>: hidden;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.box</span> &#123;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">100px</span>;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">100px</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.first</span> &#123;</span><br><span class="line">  <span class="attribute">margin-bottom</span>: <span class="number">100px</span>;</span><br><span class="line">  <span class="attribute">background-color</span>: orange;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.second</span> &#123;</span><br><span class="line">  <span class="attribute">margin-top</span>: <span class="number">50px</span>;</span><br><span class="line">  <span class="attribute">background-color</span>: wheat;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;container&quot;</span>&gt;</span><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;box first&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;container&quot;</span>&gt;</span><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;box second&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<img data-src="https://raw.githubusercontent.com/hzzzzzzzq/Blog/main/asseats/images/css/BFC/BFC2.png" alt="BFC2" style="zoom:50%;" />
-
-<p>这时候，两个盒子的垂直边距就变成了 <code>150px</code>。</p>
-<p><strong>2. BFC 可以包含浮动的元素（清除浮动）</strong></p>
-<p>浮动的元素会脱离标准文档流，我们看一个不设置 <code>BFC</code> 是的例子。</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.box</span> &#123;</span><br><span class="line">  <span class="attribute">border</span>: <span class="number">2px</span> solid <span class="number">#999</span>;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">200px</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.child</span> &#123;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">100px</span>;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">100px</span>;</span><br><span class="line">  <span class="attribute">float</span>: left;</span><br><span class="line">  <span class="attribute">background-color</span>: orange;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;box&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;child&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>我们来看看显示效果，这时候 <code>box</code> 容器没有出发 <code>BFC</code>，显示时 <code>child</code> 是有浮动起来的，脱离文档流。</p>
-<p><img data-src="https://raw.githubusercontent.com/hzzzzzzzq/Blog/main/asseats/images/css/BFC/BFC3.png" alt="BFC3"></p>
-<p>由于 <code>child</code> 元素浮动，脱离了文档流，所以容器只剩下 <code>4px</code> 的高度。</p>
-<p>现在我们让 <code>box</code> 触发 <code>BFC</code>，这时候就会将浮动元素包裹起来。</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.box</span> &#123;</span><br><span class="line">  <span class="attribute">border</span>: <span class="number">2px</span> solid <span class="number">#999</span>;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">200px</span>;</span><br><span class="line">  <span class="attribute">overflow</span>: hidden;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><img data-src="https://raw.githubusercontent.com/hzzzzzzzq/Blog/main/asseats/images/css/BFC/BFC4.png" alt="BFC4"></p>
-<p>我们看到，我们给 <code>box</code> 容器设置 <code>overflow: hidden</code> 触发 <code>BFC</code>，将浮动元素也包裹进 <code>box</code> 元素，清除了浮动效果。</p>
+<p>为了效果明显，我们在这里添加了 <code>1.5</code> 个格子的高度，来看看效果，我们就发现了，其实只保留了一个格子的高度。所以验证了外边距合并。</p>
+<p><img data-src="https://raw.githubusercontent.com/hzzzzzzzq/Blog/main/asseats/images/css/box-model/box-model7.png" alt="box-model7"></p>
+<p>而为什么会这样呢，其实在这里就是创建了一个 <a href="https://hzzzzzzzq.github.io/Blog/5a2d113b.html">《CSS 系列之 BFC 容器》</a>，可以在这边文章中去了解 <code>BFC</code>。</p>
+<p>盒模型，在面试中容易遇到，是比较简单但是很重要的知识点。</p>
 
     </div>
 
@@ -406,7 +407,7 @@
   </li>
   <li class="post-copyright-link">
       <strong>本文链接：</strong>
-      <a href="https://hzzzzzzzq.github.io/Blog/5a2d113b.html" title="CSS 系列之BFC">https://hzzzzzzzq.github.io/Blog/5a2d113b.html</a>
+      <a href="https://hzzzzzzzq.github.io/Blog/c00f253a.html" title="CSS 系列之盒模型">https://hzzzzzzzq.github.io/Blog/c00f253a.html</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh-CN" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -422,13 +423,13 @@
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/Blog/bcbd389d.html" rel="prev" title="CSS 系列之CSS 选择器">
-                  <i class="fa fa-chevron-left"></i> CSS 系列之CSS 选择器
+                <a href="/Blog/3e4e6583.html" rel="prev" title="CSS 系列之文章介绍">
+                  <i class="fa fa-chevron-left"></i> CSS 系列之文章介绍
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/Blog/bcf93fc5.html" rel="next" title="CSS 系列之flex 布局">
-                  CSS 系列之flex 布局 <i class="fa fa-chevron-right"></i>
+                <a href="/Blog/44bd1631.html" rel="next" title="CSS 系列之position 定位">
+                  CSS 系列之position 定位 <i class="fa fa-chevron-right"></i>
                 </a>
             </div>
           </div>
@@ -513,7 +514,7 @@
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.css" integrity="sha256-AJnUHL7dBv6PGaeyPQJcgQPDjt/Hn/PvYZde1iqfp8U=" crossorigin="anonymous">
 
-<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"hzzzzzzzq","repo":"hzzzzzzzq.github.io","client_id":"db7c4e0e53abcae5c547","client_secret":"d611e08d46b49ad9333ba38514f964cc7644ef8d","admin_user":"hzzzzzzzq","distraction_free_mode":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":"zh-CN","js":{"url":"https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.js","integrity":"sha256-Pmj85ojLaPOWwRtlMJwmezB/Qg8BzvJp5eTzvXaYAfA="},"path_md5":"bebb108b965019983da61b851de62116"}</script>
+<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"hzzzzzzzq","repo":"hzzzzzzzq.github.io","client_id":"db7c4e0e53abcae5c547","client_secret":"d611e08d46b49ad9333ba38514f964cc7644ef8d","admin_user":"hzzzzzzzq","distraction_free_mode":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":"zh-CN","js":{"url":"https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.js","integrity":"sha256-Pmj85ojLaPOWwRtlMJwmezB/Qg8BzvJp5eTzvXaYAfA="},"path_md5":"cc65a25d97cca79813d1c746bd077f02"}</script>
 <script src="/js/third-party/comments/gitalk.js"></script>
 
 <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"left","width":150,"height":300},"mobile":{"show":true},"log":false});</script></body>
